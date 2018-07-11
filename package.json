@@ -1,0 +1,11 @@
+{
+  "name": "mdqueries",
+  "version": "0.1.0",
+  "description": "Manage media queries in JS with ease & have fun building responsive stuff (Vuejs straightforward compatibility).",
+  "main": "dist/mdqueries.js",
+  "module": "dist/mdqueries.es.js",
+  "repository": "https://github.com/nash403/mdqueries.git",
+  "author": "Honoré Nintunze <nintu.lab@gmail.com>",
+  "license": "MIT",
+  "private": false
+}
