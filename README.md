@@ -8,7 +8,8 @@ Manage media queries in JS with ease &amp; have fun building responsive stuff (V
 - [Installation](#installation)
 - [Usage](#usage)
 - [Browser Support](#browser-support)
-- [Contributions](#contributions)
+- [Credits](#credits)
+- [Contributions](#contributing)
 
 ## Installation
 
@@ -26,6 +27,15 @@ yarn add mdqueries
 This plugin relies on matchMedia API to detect screensize change. You can use a polyfill if you need this package to work for older browsers. Check this out:
 Paul Irish: [matchMedia polyfill](https://github.com/paulirish/matchMedia.js)
 
-## Contributions
+## Credits
 
-Please [open an issue/PR](https://github.com/nash403/mdqueries/issues/new) for support. Thanks in advance for any kind of contribution !
+## Contributing
+
+Please [open an issue](https://github.com/nash403/mdqueries/issues/new) for support. Thanks in advance for any kind of contribution !
+
+1. Fork it!
+2. Create your feature branch: git checkout -b my-new-feature
+3. Commit your changes: git commit -am 'Add some feature'
+4. Push to the branch: git push origin my-new-feature
+5. Submit a pull request :D
+

@@ -7,5 +7,46 @@
   "repository": "https://github.com/nash403/mdqueries.git",
   "author": "Honoré Nintunze <nintu.lab@gmail.com>",
   "license": "MIT",
-  "private": false
+  "scripts": {
+    "clean": "rimraf dist",
+    "build": "yarn clean && yarn build && yarn build:to-mq",
+    "build:mdqueries": "bili",
+    "build:to-mq": "bili src/to-mq.js --filename 'to-mq[suffix].js' --banner --moduleName toMq",
+    "build:example": "poi build",
+    "example": "poi",
+    "release": "yarn build && release-it",
+    "test": "ava"
+  },
+  "bili": {
+    "moduleName": "mdqueries",
+    "banner": true,
+    "format": [
+      "cjs",
+      "umd",
+      "umd-min",
+      "es"
+    ],
+    "external": "vue"
+  },
+  "poi": {
+    "entry": "example/index.js",
+    "outDir": "example/dist",
+    "html": {
+      "template": "example/index.html"
+    },
+    "publicPath": "/mdqueries/"
+  },
+  "ava": {
+    "require": [
+      "esm"
+    ]
+  },
+  "devDependencies": {
+    "ava": "^0.25.0",
+    "bili": "^3.1.2",
+    "esm": "^3.0.70",
+    "poi": "^10.2.9",
+    "release-it": "^7.4.7",
+    "rimraf": "^2.6.2"
+  }
 }
