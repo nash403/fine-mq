@@ -11,7 +11,8 @@
     "clean": "rimraf dist",
     "build": "yarn clean && yarn build && yarn build:to-mq",
     "build:mdqueries": "bili",
-    "build:to-mq": "bili src/to-mq-string.js --filename 'to-mq-string[suffix].js' --banner --moduleName toMq",
+    "build:to-mq-string": "bili src/to-mq-string.js --filename 'to-mq-string[suffix].js' --banner --moduleName toMq",
+    "build:mq-interface": "bili src/mq.js --filename 'mq-interface[suffix].js' --banner --moduleName MqInterface",
     "build:example": "poi build",
     "example": "poi",
     "release": "yarn build && release-it",
@@ -38,12 +39,14 @@
   },
   "ava": {
     "require": [
-      "esm"
+      "esm",
+			"./test/helpers/setup-browser-env.js"
     ]
   },
   "devDependencies": {
     "ava": "^0.25.0",
     "bili": "^3.1.2",
+    "browser-env": "^3.2.5",
     "esm": "^3.0.70",
     "poi": "^10.2.9",
     "release-it": "^7.4.7",

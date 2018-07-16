@@ -1,10 +1,8 @@
-const DEFAULT_BREAKPOINTS = [
-  [0, 450, 1250, Infinity],
-  ['sm','md','lg']
-]
+import MqInterface from './mq'
+import toMqString from './to-mq-string'
 
-const install = (Vue, { breakpoints = DEFAULT_BREAKPOINTS } = {}) => {
+const install = () => {
 
 }
 
-export default { install }
+export default { install, MqInterface, toMqString }
