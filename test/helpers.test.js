@@ -1,7 +1,5 @@
 import test from 'ava'
-import {
-  aliasesToMqStrings
-} from '../src/helpers'
+import { aliasesToMqStrings } from '../src/helpers'
 
 test('should return media queries for each default breakpoints and their modifiers when no arguments', t => {
   t.deepEqual(aliasesToMqStrings(), {

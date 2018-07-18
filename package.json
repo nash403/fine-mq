@@ -1,25 +1,26 @@
 {
-  "name": "mdqueries",
+  "name": "fine-mq",
   "version": "0.1.0",
   "description": "Manage media queries in JS with ease & have fun building responsive stuff (Vuejs straightforward compatibility).",
-  "main": "dist/mdqueries.js",
-  "module": "dist/mdqueries.es.js",
-  "repository": "https://github.com/nash403/mdqueries.git",
+  "main": "dist/fine-mq.min.js",
+  "module": "dist/fine-mq.es.js",
+  "unpkg": "dist/fine-mq.min.js",
+  "repository": "https://github.com/nash403/fine-mq.git",
   "author": "Honoré Nintunze <nintu.lab@gmail.com>",
   "license": "MIT",
   "scripts": {
     "clean": "rimraf dist",
-    "build": "yarn clean && yarn build && yarn build:to-mq",
-    "build:mdqueries": "bili",
-    "build:to-mq-string": "bili src/to-mq-string.js --filename 'to-mq-string[suffix].js' --banner --moduleName toMq",
-    "build:mq-interface": "bili src/mq.js --filename 'mq-interface[suffix].js' --banner --moduleName MqInterface",
+    "build:all": "yarn clean && yarn build && yarn build:mq && yarn build:to-mq-string",
+    "build": "bili",
+    "build:to-mq-string": "bili src/to-mq-string.js --filename 'to-mq-string[suffix].js' --banner --moduleName toMqString",
+    "build:mq": "bili src/mq.js --filename 'mq[suffix].js' --banner --moduleName Mq",
     "build:example": "poi build",
     "example": "poi",
     "release": "yarn build && release-it",
     "test": "ava"
   },
   "bili": {
-    "moduleName": "mdqueries",
+    "moduleName": "fine-mq",
     "banner": true,
     "format": [
       "cjs",
@@ -35,7 +36,7 @@
     "html": {
       "template": "example/index.html"
     },
-    "publicPath": "/mdqueries/"
+    "publicPath": "/fine-mq/"
   },
   "ava": {
     "require": [

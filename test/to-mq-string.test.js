@@ -1,5 +1,5 @@
 import test from 'ava'
-import toMq from '../src/to-mq'
+import toMq from '../src/to-mq-string'
 
 test('should return query string for media type', t => {
   t.is(toMq({screen: true}), 'screen')

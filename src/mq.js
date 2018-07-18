@@ -1,4 +1,4 @@
-export default class MqInterface {
+export default class Mq {
   constructor (aliases = {}) {
     this.aliases = aliases
     this.queries = {}
@@ -18,6 +18,7 @@ export default class MqInterface {
 
   unalias (alias) {
     delete this.aliases[alias]
+    return this
   }
 
   on (query, callback, context) {
@@ -38,17 +39,20 @@ export default class MqInterface {
     this.queries[query] = queryObject
 
     if (queryObject.mql.matches) callback.call(context || this)
+    return this
   }
 
   off (query, callback) {
     if (!arguments.length) {
-      return Object.entries(this.queries).forEach(([queryObject, key]) => {
+      Object.entries(this.queries).forEach(([queryObject, key]) => {
         this._removeQueryObject(queryObject, key)
       })
+      return this
     }
 
     if (!callback) {
-      return this._removeQueryObject(query)
+      this._removeQueryObject(query)
+      return this
     }
 
     const queryObject = this.queries[this.aliases[query] || query]
@@ -59,6 +63,7 @@ export default class MqInterface {
       })
       if (!handlers.length) this._removeQueryObject(query)
     }
+    return this
   }
 
   _removeQueryObject (value, query) {

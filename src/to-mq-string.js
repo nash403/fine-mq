@@ -15,9 +15,8 @@ const o2mq = queryObject => {
     }, []).join(' and ')
 }
 
-const toMq = query => {
+const toMqString = query => {
   return (Array.isArray(query) ? query : [query]).map(q => o2mq(q)).join(', ')
 }
 
-// module.exports = toMq
-export default toMq
+export default toMqString

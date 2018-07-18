@@ -1,5 +1,11 @@
 import toMq from './to-mq-string'
 
+const DEFAULT_BREAKPOINT = {
+  sm: 450,
+  md: [451, 1250],
+  lg: [1251]
+}
+
 const toMqValue = v => Number.isFinite(+v) ? `${+v}px` : v
 
 const isDimension = v => Array.isArray(v) ||
@@ -17,11 +23,7 @@ const extractModifiers = (alias, [lower, upper]) =>  {
   return modifiers
 }
 
-export function aliasesToMqStrings(aliases = {
-  sm: 450,
-  md: [451, 1250],
-  lg: [1251]
-}) {
+export function aliasesToMqStrings(aliases = DEFAULT_BREAKPOINT) {
   return Object.entries(aliases).reduce((association, [alias, bounds]) => {
     const isDim = isDimension(bounds)
     if (isDim) {
