@@ -1,39 +1,41 @@
-import MqInterface from './mq'
+import Mq from './mq'
 import toMqString from './to-mq-string'
 import { aliasesToMqStrings } from './helpers'
 
-const install = (Vue, { breakpoints = {} } = {}) => {
+const install = (Vue, { breakpoints } = {}) => {
   const queries = aliasesToMqStrings(breakpoints)
-  const reactorComponent = new Vue({
+  const reactiveSource = new Vue({
     data: () => ({
-      queries: {},
+      matchingQueries: {},
+      lastActiveQuery: null
     })
   })
 
-  const mq = new MqInterface(queries)
-  Object.entrie(mq.aliases).forEach(([alias]) => {
-    const callback = qo => Vue.set(reactorComponent.$data.queries, alias, qo.mql.matches)
-    mq.on(alias, callback)
+  const mq = new Mq(queries)
+  Object.keys(mq.aliases).forEach(alias => {
+    const enter = matches => {
+      if (alias in reactiveSource.matchingQueries) {
+        reactiveSource.matchingQueries[alias] = matches
+      } else {
+        reactiveSource.matchingQueries = {...reactiveSource.matchingQueries, [alias]: matches}
+      }
+      if (matches) reactiveSource.lastActiveQuery = alias
+    }
+    mq.on(alias, enter)
   })
 
-  Vue.directive('mdqIf', {
-    bind (el, {value:alias}, vnode) {
-      mq.on(alias, qo => {
-        if (qo.mql.matches) vnode.elm.parentElement.removeChild(vnode.elm)
-      })
-    },
-    inserted (el, {value:alias}, vnode) {
-      if (reactorComponent.$data.queries[alias] && reactorComponent.$data.queries[alias].mql.matches) {
-        vnode.elm.parentElement.removeChild(vnode.elm)
-      }
-    },
-    update (el, {value:alias}, vnode) {
-      if (reactorComponent.$data.queries[alias] && reactorComponent.$data.queries[alias].mql.matches) {
-        vnode.elm.parentElement.removeChild(vnode.elm)
+  Vue.mixin({
+    computed: {
+      $matchingMQs () {
+        return reactiveSource.matchingQueries
+      },
+      $lastActiveMQ () {
+        return reactiveSource.lastActiveQuery
       }
     }
   })
 
+  Vue.prototype.$mq = mq
 }
 
-export default { install, MqInterface, toMqString }
+export default { install, Mq, toMqString }

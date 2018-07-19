@@ -6,53 +6,48 @@ export default class Mq {
 
   alias (alias, query) {
     if (query) {
-      this.aliases[alias] = query
-      return this
+      return this.aliases[alias] = query
     }
     this.aliases = {
       ...this.aliases,
       ...alias
     }
-    return this
   }
 
   unalias (alias) {
+    const query = this.queries[this.aliases[alias]]
+    if (query) query.mqMatcher
     delete this.aliases[alias]
-    return this
   }
 
   on (query, callback, context) {
+    context = context || this
     const res = this.queries[this.aliases[query] || query]
 
     const queryObject = res ? res : {
       handlers: [],
-      mql: window.matchMedia(query)
+      mqMatcher: window.matchMedia(this.aliases[query] || query)
     }
     queryObject.listener = () => {
-      if (queryObject.mql.matches) {
-        queryObject.handlers.forEach(handler => handler.callback.call(handler.context))
-      }
+      queryObject.handlers.forEach(handler => handler.callback.call(handler.context, queryObject.mqMatcher.matches))
     }
-    queryObject.mql.addListener(queryObject.listener)
-    const handler = { callback, context: context || this }
+    queryObject.mqMatcher.addListener(queryObject.listener)
+    const handler = { callback, context }
     queryObject.handlers.push(handler)
     this.queries[query] = queryObject
 
-    if (queryObject.mql.matches) callback.call(context || this)
-    return this
+    callback.call(context, queryObject.mqMatcher.matches) // initial trigger
   }
 
   off (query, callback) {
     if (!arguments.length) {
-      Object.entries(this.queries).forEach(([queryObject, key]) => {
+      Object.entries(this.queries).forEach(([key, queryObject]) => {
         this._removeQueryObject(queryObject, key)
       })
-      return this
     }
 
     if (!callback) {
       this._removeQueryObject(query)
-      return this
     }
 
     const queryObject = this.queries[this.aliases[query] || query]
@@ -63,7 +58,6 @@ export default class Mq {
       })
       if (!handlers.length) this._removeQueryObject(query)
     }
-    return this
   }
 
   _removeQueryObject (value, query) {
@@ -71,7 +65,7 @@ export default class Mq {
     query = this.aliases[query] || query
     const queryObject = this.queries[query]
     if (queryObject) {
-      queryObject.mql.removeListener(queryObject.listener)
+      queryObject.mqMatcher.removeListener(queryObject.listener)
       delete this.queries[query]
     }
   }

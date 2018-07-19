@@ -12,6 +12,10 @@ test('should return media queries for each default breakpoints and their modifie
   })
 })
 
+test('should return empty object when argument is falsy but defined', t => {
+  t.deepEqual(aliasesToMqStrings(false), {})
+})
+
 test('should return media queries for each given breakpoints (with their modifiers) and aliases', t => {
   t.deepEqual(aliasesToMqStrings({
     sm: 450,

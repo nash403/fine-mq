@@ -24,6 +24,7 @@ const extractModifiers = (alias, [lower, upper]) =>  {
 }
 
 export function aliasesToMqStrings(aliases = DEFAULT_BREAKPOINT) {
+  if (!aliases && typeof aliases !== 'undefined') return {}
   return Object.entries(aliases).reduce((association, [alias, bounds]) => {
     const isDim = isDimension(bounds)
     if (isDim) {

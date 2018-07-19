@@ -5,7 +5,12 @@ export default {
 </script>
 
 <template>
-  <div>toto</div>
+  <div>
+    <h2>Test</h2>
+    <span>
+      {{ $matchingMQs }}
+    </span>
+  </div>
 </template>
 
 <style scoped>
