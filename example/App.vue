@@ -5,10 +5,10 @@ export default {
 </script>
 
 <template>
-  <div>
+  <div class="app">
     <h2>Test</h2>
     <span>
-      {{ $matchingMQs }}
+      {{ $mqAliases }}
     </span>
   </div>
 </template>

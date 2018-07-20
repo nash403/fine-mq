@@ -1,7 +1,6 @@
 import test from 'ava'
 import Mq from '../src/mq'
-
-// window.matchMedia = () => ({addListener: ()=>{}, removeListener:()=>{}})
+import { fake } from 'sinon'
 
 test('should create a new media query wrapper with empty data', t => {
   const m = new Mq()
@@ -121,3 +120,15 @@ test('should do nothing if attempting to remove a query that doesn\'t exist', t 
   t.notThrows(() => new Mq().off('bar'))
 })
 
+test('should call listeners at leat once after registering them', t => {
+  window.matchMedia = () => ({addListener: ()=>{}, removeListener:()=>{}})
+  const m = new Mq()
+  const callbackOne = fake()
+  const callbackTwo = fake()
+
+  m.on('foo', callbackOne)
+  m.on('bar', callbackTwo)
+
+  t.true(callbackOne.called)
+  t.true(callbackTwo.called)
+})

@@ -33,6 +33,8 @@
   "poi": {
     "entry": "example/index.js",
     "outDir": "example/dist",
+    "fullBuild": true,
+    "cleanOutDir": true,
     "html": {
       "template": "example/index.html"
     },
@@ -41,7 +43,7 @@
   "ava": {
     "require": [
       "esm",
-			"./test/helpers/setup-browser-env.js"
+      "./test/helpers/setup-browser-env.js"
     ]
   },
   "devDependencies": {
@@ -51,6 +53,7 @@
     "esm": "^3.0.70",
     "poi": "^10.2.9",
     "release-it": "^7.4.7",
-    "rimraf": "^2.6.2"
+    "rimraf": "^2.6.2",
+    "sinon": "^6.1.3"
   }
 }
