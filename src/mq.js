@@ -17,8 +17,8 @@ export default class Mq {
   }
 
   unalias (alias) {
-    const query = this.queries[this.aliases[alias]]
-    if (query) query.mqMatcher
+    const queryObject = this.queries[this.aliases[alias]]
+    if (queryObject) this.off(alias)
     delete this.aliases[alias]
     return this
   }
@@ -43,7 +43,7 @@ export default class Mq {
 
     const handler = { callback, context }
     queryObject.handlers.push(handler)
-    this.queries[query] = queryObject
+    this.queries[this.aliases[query] || query] = queryObject
 
     callback.call(context, {matcher: queryObject.mqMatcher, alias: query}) // initial trigger
     return this
@@ -78,10 +78,13 @@ export default class Mq {
     return this
   }
 
-  _removeQueryObject (value, query) {
-    if (typeof value === 'string') query = value
+  _removeQueryObject (qObject, query) {
+    if (typeof qObject === 'string') {
+      query = qObject
+      qObject = undefined
+    }
     query = this.aliases[query] || query
-    const queryObject = this.queries[query]
+    const queryObject = qObject || this.queries[query]
     if (queryObject) {
       queryObject.mqMatcher.removeListener(queryObject.listener)
       delete this.queries[query]

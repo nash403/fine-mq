@@ -10,7 +10,7 @@
   "license": "MIT",
   "scripts": {
     "clean": "rimraf dist",
-    "build:all": "yarn clean && yarn build && yarn build:mq && yarn build:to-mq-string",
+    "build:all": "yarn clean && yarn build && yarn build:mq && yarn build:to-mq-string && yarn build:example",
     "build": "bili",
     "build:to-mq-string": "bili src/to-mq-string.js --filename 'to-mq-string[suffix].js' --banner --moduleName toMqString",
     "build:mq": "bili src/mq.js --filename 'mq[suffix].js' --banner --moduleName Mq",
@@ -53,6 +53,7 @@
     "browser-env": "^3.2.5",
     "esm": "^3.0.70",
     "poi": "^10.2.9",
+    "prettier": "^1.13.7",
     "release-it": "^7.4.7",
     "require-extension-hooks": "^0.3.2",
     "require-extension-hooks-babel": "^0.1.1",

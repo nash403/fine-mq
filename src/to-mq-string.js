@@ -1,7 +1,7 @@
 const hyphenize = str => str.replace(/([a-z])([A-Z])/g, '$1-$2').toLowerCase()
 
 const o2mq = queryObject => {
-  if (typeof queryObject === 'string') return queryObject
+  if (typeof queryObject === 'string' || !queryObject) return queryObject
   return Object.entries(queryObject)
     .reduce((mq, [feature, value]) => {
       feature = hyphenize(feature)

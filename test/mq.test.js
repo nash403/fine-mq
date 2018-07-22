@@ -50,6 +50,23 @@ test('should register event listeners', t => {
   )
 })
 
+test('should register event listener for alias', t => {
+  window.matchMedia = () => ({addListener: ()=>{}, removeListener:()=>{}})
+  const q = '(min-width: 450px)'
+  const m = new Mq({foo: q})
+  const callbackOne = () => {}
+
+  m.on('foo', callbackOne)
+
+  t.is(m.aliases.foo,q)
+  t.deepEqual(
+    m.queries[q].handlers,
+    [
+      { callback: callbackOne, context: m }
+    ]
+  )
+})
+
 test('should register event listeners with their context', t => {
   const m = new Mq()
   const callbackOne = () => {}
@@ -91,6 +108,57 @@ test('should remove all event listeners for a query', t => {
   m.off('bar')
   t.falsy(m.queries.bar)
 })
+
+test('should remove event listener for alias when unaliased', t => {
+  window.matchMedia = () => ({addListener: ()=>{}, removeListener:()=>{}})
+  const q = '(min-width: 450px)'
+  const m = new Mq({foo: q})
+  const callbackOne = () => {}
+
+  m.on('foo', callbackOne)
+
+  t.is(m.aliases.foo,q)
+  t.deepEqual(
+    m.queries[q].handlers,
+    [
+      { callback: callbackOne, context: m }
+    ]
+  )
+
+  m.unalias('foo')
+  t.is(m.aliases.foo,undefined)
+  t.is(m.queries[q], undefined)
+})
+
+test('should remove only the specified event handler for an alias', t => {
+  window.matchMedia = () => ({addListener: ()=>{}, removeListener:()=>{}})
+  const q = '(min-width: 450px)'
+  const m = new Mq({foo: q})
+  const callbackOne = () => {}
+  const callbackTwo = () => {}
+
+  m.on('foo', callbackOne)
+  m.on('foo', callbackTwo)
+
+  t.is(m.aliases.foo, q)
+  t.deepEqual(
+    m.queries[q].handlers,
+    [
+      { callback: callbackOne, context: m },
+      { callback: callbackTwo, context: m }
+    ]
+  )
+
+  m.off('foo', callbackTwo)
+  t.is(m.aliases.foo, q)
+  t.deepEqual(
+    m.queries[q].handlers,
+    [
+      { callback: callbackOne, context: m }
+    ]
+  )
+})
+
 test('should remove only the specified event handler for a query', t => {
   const m = new Mq()
   const callback = () => {}
