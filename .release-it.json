@@ -1,6 +1,0 @@
-{
-  "src": {
-    "tagName": "v%s",
-    "afterReleaseCommand": "echo Successfully released ${version} to ${dist.repo}."
-  }
-}
