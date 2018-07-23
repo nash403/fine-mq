@@ -68,9 +68,9 @@ import App from './App'
 
 Vue.use(FineMq, {
   aliases: {
-    sm: 450, // <=> [0, 450]
-    md: [451, 1250],
-    lg: [1251], // <=> [1251, Infinity]
+    sm: 680, // <=> [0, 680]
+    md: [681, 1024],
+    lg: [1025], // <=> [1025, Infinity]
     landscape: '(orientation: landscape)',
     an_alias_name: {
       screen: true,
@@ -79,16 +79,16 @@ Vue.use(FineMq, {
     }
   }
 })
-// or just Vue.use(FineMq). By default aliases are { sm: 450, md: [451, 1250], lg: [1251] }
+// or just Vue.use(FineMq). By default aliases are { sm: 680, md: [681, 1024], lg: [1025] }
 
 // => This will register the following aliases:
 // {
-//   sm: '(max-width: 450px)',
-//   'sm+': '(min-width: 451px)',
-//   md: '(min-width: 451px) and (max-width: 1250px)',
-//   'md+': '(min-width: 1251px)',
-//   'md!': '(min-width: 451px)',
-//   lg: '(min-width: 1251px)',
+//   sm: '(max-width: 680px)',
+//   'sm+': '(min-width: 681px)',
+//   md: '(min-width: 681px) and (max-width: 1024px)',
+//   'md+': '(min-width: 1025px)',
+//   'md!': '(min-width: 681px)',
+//   lg: '(min-width: 1025px)',
 //   landscape: '(orientation: landscape)',
 //   an_alias_name: 'screen and (min-width: 380px) and (max-width: 768px)'
 // }

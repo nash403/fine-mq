@@ -1,9 +1,9 @@
 import toMqStr from './to-mq-string'
 
 const DEFAULT_ALIASES = {
-  sm: 450,
-  md: [451, 1250],
-  lg: [1251]
+  sm: 680,
+  md: [681, 1024],
+  lg: [1025]
 }
 
 const toMqValue = v => (Number.isFinite(+v) ? `${+v}px` : v)

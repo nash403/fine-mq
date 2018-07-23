@@ -38,12 +38,12 @@ test('isDimension: should return false when argument is not a dimension', t => {
 
 test('should return media queries for each default breakpoints and their modifiers when no arguments', t => {
   t.deepEqual(aliasesToMqStrings(), {
-    sm: '(max-width: 450px)',
-    'sm+': '(min-width: 451px)',
-    md: '(min-width: 451px) and (max-width: 1250px)',
-    'md+': '(min-width: 1251px)',
-    'md!': '(min-width: 451px)',
-    lg: '(min-width: 1251px)'
+    sm: '(max-width: 680px)',
+    'sm+': '(min-width: 681px)',
+    md: '(min-width: 681px) and (max-width: 1024px)',
+    'md+': '(min-width: 1025px)',
+    'md!': '(min-width: 681px)',
+    lg: '(min-width: 1025px)'
   })
 })
 
