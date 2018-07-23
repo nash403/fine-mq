@@ -2,7 +2,7 @@
 
 > A fine API to manage media queries in JS with ease. It has first-class integration with VueJS.
 
-**Demo**: [here](https://nash403.github.io/fine-mq/example/dist/)
+**Demo**: [here](https://nash403.github.io/fine-mq)
 
 ## Table of Contents
 
@@ -35,15 +35,15 @@ This main file exposes a `install` function (Vue plugin), a `Mq` class and `toMq
 
 These are all the builds available via unpkg:
 
-* `https://unpkg.com/fine-mq/dist/fine-mq.min.js` (umd)
-* `https://unpkg.com/fine-mq/dist/fine-mq.cjs.js` (commonjs)
-* `https://unpkg.com/fine-mq/dist/fine-mq.es.js` (es module)
-* `https://unpkg.com/fine-mq/dist/mq.min.js` (umd)
-* `https://unpkg.com/fine-mq/dist/mq.cjs.js` (commonjs)
-* `https://unpkg.com/fine-mq/dist/mq.es.js` (es module)
-* `https://unpkg.com/fine-mq/dist/to-mq-string.min.js` (umd)
-* `https://unpkg.com/fine-mq/dist/to-mq-string.cjs.js` (commonjs)
-* `https://unpkg.com/fine-mq/dist/to-mq-string.es.js` (es module)
+* [`https://unpkg.com/fine-mq/dist/fine-mq.min.js`](https://unpkg.com/fine-mq/dist/fine-mq.min.js) (umd)
+* [`https://unpkg.com/fine-mq/dist/fine-mq.cjs.js`](https://unpkg.com/fine-mq/dist/fine-mq.cjs.js) (commonjs)
+* [`https://unpkg.com/fine-mq/dist/fine-mq.es.js`](https://unpkg.com/fine-mq/dist/fine-mq.es.js) (es module)
+* [`https://unpkg.com/fine-mq/dist/mq.min.js`](https://unpkg.com/fine-mq/dist/mq.min.js) (umd)
+* [`https://unpkg.com/fine-mq/dist/mq.cjs.js`](https://unpkg.com/fine-mq/dist/mq.cjs.js) (commonjs)
+* [`https://unpkg.com/fine-mq/dist/mq.es.js`](https://unpkg.com/fine-mq/dist/mq.es.js) (es module)
+* [`https://unpkg.com/fine-mq/dist/to-mq-string.min.js`](https://unpkg.com/fine-mq/dist/to-mq-string.min.js) (umd)
+* [`https://unpkg.com/fine-mq/dist/to-mq-string.cjs.js`](https://unpkg.com/fine-mq/dist/to-mq-string.cjs.j) (commonjs)
+* [`https://unpkg.com/fine-mq/dist/to-mq-string.es.js`](https://unpkg.com/fine-mq/dist/to-mq-string.es.js) (es module)
 
 
 
@@ -63,22 +63,23 @@ import Vue from 'vue'
 import FineMq from 'fine-mq'
 import App from './App'
 
+// Define your aliases
 // NOTE: any size can be expressed as a number, anything that can be casted to a finite number, Infinity, or a size in 'px' or 'em' unit.
+
 Vue.use(FineMq, {
-  breakpoints: {
+  aliases: {
     sm: 450, // <=> [0, 450]
     md: [451, 1250],
     lg: [1251], // <=> [1251, Infinity]
-
-    // above are the default breakpoints if none are provided
     landscape: '(orientation: landscape)',
-    another_alias: {
+    an_alias_name: {
       screen: true,
       minWidth: '23em',
       maxWidth: '768px'
     }
   }
 })
+// or just Vue.use(FineMq). By default aliases are { sm: 450, md: [451, 1250], lg: [1251] }
 
 // => This will register the following aliases:
 // {
@@ -89,7 +90,7 @@ Vue.use(FineMq, {
 //   'md!': '(min-width: 451px)',
 //   lg: '(min-width: 1251px)',
 //   landscape: '(orientation: landscape)',
-//   another_alias 'screen and (min-width: 380px) and (max-width: 768px)'
+//   an_alias_name: 'screen and (min-width: 380px) and (max-width: 768px)'
 // }
 
 // Three reactive properties will then be available on Vue instances:
@@ -139,6 +140,11 @@ The `if` prop if required and can be a String/Array/Object. Modifiers are also s
 <MqShow :if="{orientation: 'landscape'}"> <!-- object notation is also supported -->
   <!-- slot ... -->
 </MqShow>
+
+<!-- or -->
+<MqShow if="an_alias_name">
+  <!-- slot ... -->
+</MqShow>
 ```
 
 - The `v-mq-show-if` directive sets the display property of the bound element's style to `'none'` only when none of the given media queries matches. _Cons:_ The rendered element will still appear in the DOM tree even if not displayed. Usage is the same as for the component.
@@ -160,6 +166,9 @@ The `if` prop if required and can be a String/Array/Object. Modifiers are also s
 
 <!-- or -->
 <div v-mq-show-if="{orientation: 'landscape'}">...</div>
+
+<!-- or -->
+<div v-mq-show-if="'an_alias_name'">...</div>
 ```
 
 ### `Mq` API
@@ -176,13 +185,15 @@ const mq = new Mq({
   medium: 'only screen and (min-width: 480px) and (max-width: 720px)'
 })
 
-const changeColour = colour => () => {
-  document.body.style.backgroundColor = colour
+const defaultColor = '#FFF'
+
+const changeColor = color => ({matcher, alias}) => {
+  document.body.style.backgroundColor = matcher.mathces ? color : defaultColor
 }
 
-mq.on('small', changeColour('blue'))
-mq.on('medium', changeColour('green'))
-mq.on('only screen and (min-width: 720px)', changeColour('red'))
+mq.on('small', changeColor('blue'))
+mq.on('medium', changeColor('green'))
+mq.on('only screen and (min-width: 720px)', changeColor('red'))
 ```
 
 #### API description

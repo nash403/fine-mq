@@ -4,8 +4,8 @@ import { aliasesToMqStrings } from './helpers'
 import MqShowComponent from './component'
 import MqShowDirective from './directive'
 
-const install = (Vue, { breakpoints } = {}) => {
-  const queries = aliasesToMqStrings(breakpoints)
+const install = (Vue, { aliases } = {}) => {
+  const queries = aliasesToMqStrings(aliases)
   const reactiveSource = new Vue({
     data: () => ({
       matchingQueries: {},

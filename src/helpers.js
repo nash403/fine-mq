@@ -1,6 +1,6 @@
 import toMqStr from './to-mq-string'
 
-const DEFAULT_BREAKPOINT = {
+const DEFAULT_ALIASES = {
   sm: 450,
   md: [451, 1250],
   lg: [1251]
@@ -26,7 +26,7 @@ export const extractModifiers = (alias, [lower, upper]) => {
   return modifiers
 }
 
-export function aliasesToMqStrings(aliases = DEFAULT_BREAKPOINT) {
+export function aliasesToMqStrings(aliases = DEFAULT_ALIASES) {
   if (!aliases && typeof aliases !== 'undefined') return {}
   return Object.entries(aliases).reduce((association, [alias, bounds]) => {
     const isDim = isDimension(bounds)
