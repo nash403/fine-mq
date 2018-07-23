@@ -1,13 +1,21 @@
 {
   "name": "fine-mq",
   "version": "0.1.0",
-  "description": "Manage media queries in JS with ease & have fun building responsive stuff (Vuejs straightforward compatibility).",
+  "description": "A fine API to manage media queries in JS with ease. It has first-class integration with VueJS.",
   "main": "dist/fine-mq.min.js",
   "module": "dist/fine-mq.es.js",
   "unpkg": "dist/fine-mq.min.js",
   "repository": "https://github.com/nash403/fine-mq.git",
   "author": "Honoré Nintunze <nintu.lab@gmail.com>",
   "license": "MIT",
+  "keywords": [
+    "mq",
+    "media query",
+    "media queries",
+    "rwd",
+    "responsive",
+    "mobile"
+  ],
   "scripts": {
     "clean": "rimraf dist",
     "build:all": "yarn clean && yarn build && yarn build:mq && yarn build:to-mq-string && yarn build:example",
@@ -19,6 +27,9 @@
     "release": "yarn build && release-it",
     "test": "ava"
   },
+  "files": [
+    "./dist/*"
+  ],
   "bili": {
     "moduleName": "fine-mq",
     "banner": true,

@@ -55,7 +55,9 @@ const component = {
     }
   },
   render(h) {
-    return this.shouldRenderChildren ? h(this.tag, this.$slots.default) : h()
+    return this.shouldRenderChildren
+      ? this.$slots.default && this.$slots.default.length === 1 ? this.$slots.default[0] : h(this.tag, this.$slots.default)
+      : h()
   },
   beforeDestroy() {
     Object.keys(this.localMQAliases).forEach(_if => this.$mq.off(_if, this.enter, this))

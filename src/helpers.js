@@ -15,7 +15,7 @@ export const isDimension = v =>
 
 export const extractModifiers = (alias, [lower, upper]) => {
   let modifiers = {}
-  if (lower !== '0px' && upper !== Infinity && typeof upper !== 'undefined')
+  if (lower !== '0px' && lower !== '0em' && upper !== Infinity && typeof upper !== 'undefined')
     modifiers[`${alias}!`] = toMqStr({
       minWidth: lower
     })
