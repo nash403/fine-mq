@@ -1,10 +1,9 @@
 {
   "name": "fine-mq",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "A fine API to manage media queries in JS with ease. It has first-class integration with VueJS.",
   "main": "dist/fine-mq.min.js",
   "module": "dist/fine-mq.es.js",
-  "unpkg": "dist/fine-mq.min.js",
   "repository": "https://github.com/nash403/fine-mq.git",
   "author": "Honoré Nintunze <nintu.lab@gmail.com>",
   "license": "MIT",
@@ -71,5 +70,6 @@
     "require-extension-hooks-vue": "^1.0.1",
     "rimraf": "^2.6.2",
     "sinon": "^6.1.3"
-  }
+  },
+  "dependencies": {}
 }
