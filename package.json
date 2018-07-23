@@ -1,6 +1,6 @@
 {
   "name": "fine-mq",
-  "version": "1.0.2",
+  "version": "1.0.3",
   "description": "A fine API to manage media queries in JS with ease. It has first-class integration with VueJS.",
   "main": "dist/fine-mq.min.js",
   "module": "dist/fine-mq.es.js",
@@ -27,18 +27,7 @@
     "test": "ava"
   },
   "files": [
-    "./dist/fine-mq.min.js",
-    "./dist/fine-mq.min.js.map",
-    "./dist/fine-mq.es.js",
-    "./dist/fine-mq.cjs.js",
-    "./dist/mq.min.js",
-    "./dist/mq.min.js.map",
-    "./dist/mq.es.js",
-    "./dist/mq.cjs.js",
-    "./dist/to-mq-string.min.js",
-    "./dist/to-mq-string.min.js.map",
-    "./dist/to-mq-string.es.js",
-    "./dist/to-mq-string.cjs.js"
+    "dist/"
   ],
   "bili": {
     "moduleName": "fine-mq",
