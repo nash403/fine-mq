@@ -1,6 +1,6 @@
 {
   "name": "fine-mq",
-  "version": "1.0.0",
+  "version": "0.1.0",
   "description": "A fine API to manage media queries in JS with ease. It has first-class integration with VueJS.",
   "main": "dist/fine-mq.min.js",
   "module": "dist/fine-mq.es.js",
@@ -24,7 +24,7 @@
     "build:mq": "bili src/mq.js --filename 'mq[suffix].js' --banner --moduleName Mq",
     "build:example": "poi build",
     "example": "poi",
-    "release": "yarn build:all && release-it",
+    "release": "yarn test && yarn build:all && release-it",
     "test": "ava"
   },
   "files": [

@@ -90,7 +90,7 @@ test('should render component with given root element if the "tag" prop is passe
 
 test('should accept object style notation for alias values when registering the plugin', t => {
   const localVue = createLocalVue()
-  localVue.use(Plugin, { breakpoints: { example: {screen: true} } })
+  localVue.use(Plugin, { aliases: { example: {screen: true} } })
   const wrapper = mount(Component, {
     localVue,
     propsData: {if:''}
