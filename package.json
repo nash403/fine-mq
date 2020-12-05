@@ -1,75 +1,116 @@
 {
   "name": "fine-mq",
   "version": "1.1.0",
-  "description": "A fine API to manage media queries in JS with ease. It has first-class integration with VueJS.",
-  "main": "dist/fine-mq.min.js",
-  "module": "dist/fine-mq.es.js",
+  "description": "A fine API to use media queries in JS with ease and with first-class integration with Vue.js/Nuxt.js.",
+  "main": "build/main/index.js",
+  "typings": "build/main/index.d.ts",
+  "module": "build/module/index.js",
   "repository": "https://github.com/nash403/fine-mq.git",
   "author": "Honoré Nintunze <nintu.lab@gmail.com>",
   "license": "MIT",
   "keywords": [
     "mq",
-    "media query",
-    "media queries",
+    "mediaQuery",
+    "mediaQueries",
+    "matchMedia",
     "rwd",
-    "responsive",
-    "mobile"
+    "json2mq",
+    "object2mediaQuery"
   ],
   "scripts": {
-    "clean": "rimraf dist",
-    "build:all": "yarn clean && yarn build && yarn build:mq && yarn build:to-mq-string",
-    "build": "bili",
-    "build:to-mq-string": "bili src/to-mq-string.js --filename 'to-mq-string[suffix].js' --banner --moduleName toMqString",
-    "build:mq": "bili src/mq.js --filename 'mq[suffix].js' --banner --moduleName Mq",
-    "build:example": "poi build",
-    "example": "poi",
-    "release": "yarn test && yarn build:all && release-it",
-    "test": "ava"
+    "build": "run-p build:*",
+    "build:main": "tsc -p tsconfig.json",
+    "build:module": "tsc -p tsconfig.module.json",
+    "fix": "run-s fix:*",
+    "fix:prettier": "prettier \"src/**/*.ts\" --write",
+    "fix:lint": "eslint src --ext .ts --fix",
+    "test": "run-s build test:*",
+    "test:lint": "eslint src --ext .ts",
+    "test:prettier": "prettier \"src/**/*.ts\" --list-different",
+    "test:spelling": "cspell \"{README.md,.github/*.md,src/**/*.ts}\"",
+    "test:unit": "nyc --silent ava",
+    "check-cli": "run-s test diff-integration-tests check-integration-tests",
+    "check-integration-tests": "run-s check-integration-test:*",
+    "diff-integration-tests": "mkdir -p diff && rm -rf diff/test && cp -r test diff/test && rm -rf diff/test/test-*/.git && cd diff && git init --quiet && git add -A && git commit --quiet --no-verify --allow-empty -m 'WIP' && echo '\\n\\nCommitted most recent integration test output in the \"diff\" directory. Review the changes with \"cd diff && git diff HEAD\" or your preferred git diff viewer.'",
+    "watch:build": "tsc -p tsconfig.json -w",
+    "watch:test": "nyc --silent ava --watch",
+    "cov": "run-s build test:unit cov:html cov:lcov && open-cli coverage/index.html",
+    "cov:html": "nyc report --reporter=html",
+    "cov:lcov": "nyc report --reporter=lcov",
+    "cov:send": "run-s cov:lcov && codecov",
+    "cov:check": "nyc report && nyc check-coverage --lines 100 --functions 100 --branches 100",
+    "doc": "run-s doc:html && open-cli build/docs/index.html",
+    "doc:html": "typedoc src/ --exclude **/*.spec.ts --target ES6 --mode file --out build/docs",
+    "doc:json": "typedoc src/ --exclude **/*.spec.ts --target ES6 --mode file --json build/docs/typedoc.json",
+    "doc:publish": "gh-pages -m \"[ci skip] Updates\" -d build/docs",
+    "version": "semantic-release",
+    "reset-hard": "git clean -dfx && git reset --hard && npm i",
+    "prepare-release": "run-s reset-hard test cov:check doc:html semantic-release doc:publish",
+    "commit": "./node_modules/cz-customizable/standalone.js"
+  },
+  "engines": {
+    "node": ">=10"
+  },
+  "dependencies": {},
+  "devDependencies": {
+    "@ava/typescript": "^1.1.1",
+    "@commitlint/cli": "^11.0.0",
+    "@commitlint/config-conventional": "^11.0.0",
+    "@istanbuljs/nyc-config-typescript": "^1.0.1",
+    "@semantic-release/changelog": "^5.0.1",
+    "@semantic-release/git": "^9.0.0",
+    "@typescript-eslint/eslint-plugin": "^4.0.1",
+    "@typescript-eslint/parser": "^4.0.1",
+    "ava": "^3.12.1",
+    "codecov": "^3.5.0",
+    "commitlint-config-cz": "^0.13.2",
+    "cspell": "^4.1.0",
+    "cz-customizable": "^6.3.0",
+    "eslint": "^7.8.0",
+    "eslint-config-prettier": "^6.11.0",
+    "eslint-plugin-eslint-comments": "^3.2.0",
+    "eslint-plugin-import": "^2.22.0",
+    "eslint-plugin-unicorn": "^23.0.0",
+    "gh-pages": "^3.1.0",
+    "husky": "^4.3.0",
+    "lint-staged": "^10.5.3",
+    "npm-run-all": "^4.1.5",
+    "nyc": "^15.1.0",
+    "open-cli": "^6.0.1",
+    "prettier": "^2.1.1",
+    "semantic-release": "^17.3.0",
+    "ts-node": "^9.0.0",
+    "typedoc": "^0.19.2",
+    "typescript": "^4.0.2"
   },
   "files": [
-    "dist/"
+    "build/main",
+    "build/module",
+    "!**/*.spec.*",
+    "!**/*.json",
+    "CHANGELOG.md",
+    "LICENSE",
+    "README.md"
   ],
-  "bili": {
-    "moduleName": "fine-mq",
-    "banner": true,
-    "format": [
-      "cjs",
-      "umd",
-      "umd-min",
-      "es"
-    ],
-    "external": "vue"
-  },
-  "poi": {
-    "entry": "example/index.js",
-    "outDir": "example/dist",
-    "fullBuild": true,
-    "cleanOutDir": true,
-    "html": {
-      "template": "example/index.html"
-    },
-    "publicPath": "/fine-mq/"
-  },
   "ava": {
-    "require": [
-      "esm",
-      "./test/helpers/setup.js"
+    "failFast": true,
+    "timeout": "60s",
+    "typescript": {
+      "rewritePaths": {
+        "src/": "build/main/"
+      }
+    },
+    "files": [
+      "!build/module/**"
     ]
   },
-  "devDependencies": {
-    "@vue/test-utils": "^1.0.0-beta.20",
-    "ava": "^0.25.0",
-    "bili": "^3.1.2",
-    "browser-env": "^3.2.5",
-    "esm": "^3.0.70",
-    "poi": "^10.2.9",
-    "prettier": "^1.13.7",
-    "release-it": "^7.4.7",
-    "require-extension-hooks": "^0.3.2",
-    "require-extension-hooks-babel": "^0.1.1",
-    "require-extension-hooks-vue": "^1.0.1",
-    "rimraf": "^2.6.2",
-    "sinon": "^6.1.3"
+  "lint-staged": {
+    "*.{ts,js,vue}": "eslint --fix --ext .ts,.js,.vue --ignore-path .eslintignore"
   },
-  "dependencies": {}
+  "nyc": {
+    "extends": "@istanbuljs/nyc-config-typescript",
+    "exclude": [
+      "**/*.spec.js"
+    ]
+  }
 }

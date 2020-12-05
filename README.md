@@ -45,11 +45,10 @@ These are all the builds available via unpkg:
 * [`https://unpkg.com/fine-mq/dist/to-mq-string.cjs.js`](https://unpkg.com/fine-mq/dist/to-mq-string.cjs.j) (commonjs)
 * [`https://unpkg.com/fine-mq/dist/to-mq-string.es.js`](https://unpkg.com/fine-mq/dist/to-mq-string.es.js) (es module)
 
-
-
 ## Usage
 
 This package is a set of three libs.
+
 * A vue plugin that exposes useful properties on vue instances, a component and a directive. This lib includes the two others. (`FineMq`)
 * A media query interface that lets you add/remove aliases to media queries, register/unregister handlers that listen to matching state of a media query or alias. (`Mq`)
 * A lib that exposes a single function that helps you transorm a media query written as a JavaScript object to its string value. (`toMqString`)
@@ -105,7 +104,6 @@ Vue.use(FineMq, {
 **NOTE 2:** If you specify the unit for your size, the `+ 1` operation will not be performed.
 
 Then in your templates, you can use the globally defined `MqShow` component or `v-mq-show-if` directive.
-
 
 - The `MqShow` component facilitate conditional rendering with media queries. It renders its content only when one fo the given media queries matches. _Cons:_ **If the slot content has multiple root nodes**, they will be wrapped by a DIV tag but you can customize the wrapper tag to render with the `tag` prop.
 
@@ -270,25 +268,33 @@ toMqString({minWidth: 100, maxWidth: 200});
 ```
 
 ##### Media type
+
 ```javascript
 toMqString({screen: true});  // -> 'screen'
 ```
+
 ##### Media type with negation
+
 ```javascript
 toMqString({handheld: false});  // -> 'not handheld'
 ```
 
 ##### Media features can be specified in camel case
+
 ```javascript
 toMqString({minWidth: 100, maxWidth: 200});
 // -> '(min-width: 100px) and (max-width: 200px)'
 ```
+
 ##### px is added to numeric dimension values
+
 ```javascript
 toMqString({minWidth: 100, maxWidth: '20em'});
 // -> '(min-width: 100px) and (max-width: 20em)'
 ```
+
 ##### Multiple media queries can be passed as an array
+
 ```javascript
 toMqString([{screen: true, minWidth: 100}, {handheld: true, orientation: 'landscape'}]);
 // -> 'screen and (min-width: 100px), handheld and (orientation: landscape)'
@@ -297,6 +303,7 @@ toMqString([{screen: true, minWidth: 100}, {handheld: true, orientation: 'landsc
 **NOTE:** When passing an array to the Vue component/directive and you want it to be considered as one media query like in the last example, remember to wrap it in another array like this: `[[{screen: true, minWidth: 100}, {handheld: true, orientation: 'landscape'}]]` (that will register a single listener for 'screen and (min-width: 100px), handheld and (orientation: landscape)' instead of multiple listeners, one for 'screen and (min-width: 100px)' and another for 'handheld and (orientation: landscape)' )
 
 ## Browser Support
+
 This plugin relies on matchMedia API to detect screensize change. You can use a polyfill if you need this package to work for older browsers. Check this out:
 Paul Irish: [matchMedia polyfill](https://github.com/paulirish/matchMedia.js)
 
@@ -322,4 +329,3 @@ Please [open an issue](https://github.com/nash403/fine-mq/issues/new) for suppor
 
 - [ ] add demo on a `gh-pages` branch
 - [ ] add tests for destroy/unbind hooks
-

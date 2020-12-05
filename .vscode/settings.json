@@ -1,0 +1,20 @@
+{
+  "cSpell.userWords": [], // only use words from .cspell.json
+  "cSpell.enabled": true,
+  "editor.formatOnSave": true,
+  "typescript.tsdk": "node_modules/typescript/lib",
+  "typescript.enablePromptUseWorkspaceTsdk": true,
+  "workbench.colorCustomizations": {
+    "activityBar.activeBackground": "#2a9c2a",
+    "activityBar.activeBorder": "#cdcdf1",
+    "activityBar.background": "#2a9c2a",
+    "activityBar.foreground": "#e7e7e7",
+    "activityBar.inactiveForeground": "#e7e7e799",
+    "activityBarBadge.background": "#cdcdf1",
+    "activityBarBadge.foreground": "#15202b",
+    "statusBar.background": "#1f741f",
+    "statusBar.foreground": "#e7e7e7",
+    "statusBarItem.hoverBackground": "#2a9c2a"
+  },
+  "peacock.color": "#1f741f"
+}
