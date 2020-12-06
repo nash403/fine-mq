@@ -45,7 +45,7 @@
     "doc:publish": "gh-pages -m \"[ci skip] Updates\" -d build/docs",
     "version": "semantic-release",
     "reset-hard": "git clean -dfx && git reset --hard && npm i",
-    "prepare-release": "run-s reset-hard test cov:check doc:html semantic-release doc:publish",
+    "prepare-release": "run-s reset-hard test cov:check doc:html version doc:publish",
     "commit": "./node_modules/cz-customizable/standalone.js",
     "clean": "rm -rf build .nyc_output"
   },
