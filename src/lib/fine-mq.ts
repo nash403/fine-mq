@@ -1,64 +1,18 @@
-/* eslint-disable unicorn/prevent-abbreviations */
-import { default as json2mq, QueryObject } from 'json2mq'
 
-export type MediaQueryString = string
+import { QueryObject } from 'json2mq'
 
-export type MediaQueryMatcherHandlerParams = {
-  readonly matches: boolean
-  readonly mediaQuery: MediaQueryString
-  readonly alias: string
-}
+import { aliases2mq } from './helpers'
+import { FineMediaQueries, MatchingAliases, MediaQueryAliases, MediaQueryMatcherHandler, MediaQueryMatchListener, MediaQueryObject, MediaQueryToMatch, Mq } from './types'
 
-export type MediaQueryMatcherHandler = (matchedMq: MediaQueryMatcherHandlerParams) => void
+const getMediaQueryString = (mq: Mq, aliasOrMediaQuery: string): MediaQueryToMatch => mq.aliases[aliasOrMediaQuery] || aliasOrMediaQuery
 
-export type MediaQueryMatchListener = {
-  readonly handlers: MediaQueryMatcherHandler[];
-  readonly matcher: MediaQueryList;
-  readonly listener: (e: MediaQueryListEvent | { matches: boolean }) => void;
-}
+const getAliasesForMediaQuery = (mq: Mq, mediaQuery: string): string[] => Object.entries(mq.aliases).filter(([, mq]) => mq === mediaQuery).map(([alias]) => alias)
 
-export type MediaQueryAliases = {
-  [alias: string]: MediaQueryString;
-}
+const getMatchListener = (mq: Mq, aliasOrMediaQuery: string): MediaQueryMatchListener => mq.matchers[getMediaQueryString(mq, aliasOrMediaQuery)]
 
-export type MediaQueryMatchers = {
-  [alias: string]: MediaQueryMatchListener;
-}
+const setMatchingAliases = (mq: Mq, matchingAliases: MatchingAliases = {}) => mq.matchingAliases = matchingAliases
 
-export type MatchingAliases = {
-  [alias: string]: boolean;
-}
-
-export type Mq = {
-  aliases: MediaQueryAliases
-  matchers: MediaQueryMatchers
-  matchingAliases: MatchingAliases
-}
-
-export type FineMediaQueries = {
-  mq: Mq
-  setMatchingAliases: (matchingAliases: MatchingAliases) => void
-  on: (aliasOrMediaQuery: string, callback: MediaQueryMatcherHandler) => void
-  off: (aliasOrMediaQuery?: string, callback?: MediaQueryMatcherHandler) => void
-  alias: (alias: string | { [key: string]: MediaQueryString | QueryObject }, mediaQuery?: MediaQueryString | QueryObject) => void
-  unalias: (alias: string) => void
-}
-
-export const getMediaQueryString = (mq: Mq, aliasOrMediaQuery: string): MediaQueryString => mq.aliases[aliasOrMediaQuery] || aliasOrMediaQuery
-
-export const getMatchListener = (mq: Mq, aliasOrMediaQuery: string): MediaQueryMatchListener => mq.matchers[getMediaQueryString(mq, aliasOrMediaQuery)]
-
-export const setMatchingAliases = (mq: Mq, matchingAliases: MatchingAliases = {}) => mq.matchingAliases = matchingAliases
-
-export const aliases2mq = (aliases: { [key: string]: MediaQueryString | QueryObject }): MediaQueryAliases => {
-  const mqAliases: MediaQueryAliases = {}
-  for (const [_alias, _mediaQuery] of Object.entries(aliases)) {
-    mqAliases[_alias] = json2mq(_mediaQuery as QueryObject)
-  }
-  return mqAliases
-}
-
-export const createNewMediaQueryMatchListener = (mq: Mq, aliasOrMediaQuery: string, callback: MediaQueryMatcherHandler): MediaQueryMatchListener => {
+const createNewMediaQueryMatchListener = (mq: Mq, aliasOrMediaQuery: string, callback: MediaQueryMatcherHandler): MediaQueryMatchListener => {
   const mediaQuery = getMediaQueryString(mq, aliasOrMediaQuery)
   if (!mediaQuery) throw new TypeError('A media query string or an existing alias is required in order to create a new match listener')
   if (typeof callback !== 'function') throw new TypeError('The callback function needs to be defined in order to create a new match listener')
@@ -66,16 +20,23 @@ export const createNewMediaQueryMatchListener = (mq: Mq, aliasOrMediaQuery: stri
   const mqMatcher: MediaQueryMatchListener = {
     handlers: [],
     matcher: window.matchMedia(mediaQuery),
-    listener: (e) => {
-      if (mq.aliases[aliasOrMediaQuery]) {
-          mq.matchingAliases= {
+    listener: (event) => {
+      const aliases = getAliasesForMediaQuery(mq, mediaQuery)
+      if (aliases.length > 0) {
+        const matchingAliases: MatchingAliases = {}
+        for (const alias of aliases) {
+          matchingAliases[alias] = event.matches
+        }
+
+        mq.matchingAliases= {
           ...mq.matchingAliases,
-          [aliasOrMediaQuery]: e.matches,
+          ...matchingAliases,
         }
       }
+
       mqMatcher.handlers.forEach(
         handler => handler.call(undefined, {
-          matches: e.matches,
+          matches: event.matches,
           mediaQuery,
           alias: aliasOrMediaQuery
         })
@@ -89,7 +50,7 @@ export const createNewMediaQueryMatchListener = (mq: Mq, aliasOrMediaQuery: stri
   return mqMatcher
 }
 
-export const removeMediaQueryMatchListener = (mq: Mq, aliasOrMediaQuery: string): void => {
+const removeMediaQueryMatchListener = (mq: Mq, aliasOrMediaQuery: string): void => {
   const mediaQuery = getMediaQueryString(mq, aliasOrMediaQuery)
   const { [mediaQuery]: mqMatcher, ...otherMatchers } = mq.matchers
   if (mqMatcher) {
@@ -110,7 +71,7 @@ export const on = (mq: Mq, aliasOrMediaQuery: string, callback: MediaQueryMatche
 export const off = (mq: Mq, aliasOrMediaQuery?: string, callback?: MediaQueryMatcherHandler): void => {
   if (!aliasOrMediaQuery) {
     // remove all listeners
-    Object.keys(mq.matchers).forEach((mediaQuery: MediaQueryString) => removeMediaQueryMatchListener(mq, mediaQuery))
+    Object.keys(mq.matchers).forEach((mediaQuery: MediaQueryToMatch) => removeMediaQueryMatchListener(mq, mediaQuery))
     return
   }
 
@@ -132,11 +93,11 @@ export const off = (mq: Mq, aliasOrMediaQuery?: string, callback?: MediaQueryMat
   }
 }
 
-export const addAlias = (mq: Mq, alias: string | { [key: string]: MediaQueryString | QueryObject }, mediaQuery?: MediaQueryString | QueryObject): void => {
+export const addAlias = (mq: Mq, alias: string | { [key: string]: MediaQueryObject }, mediaQuery?: MediaQueryObject): void => {
   if (typeof alias === 'string' && mediaQuery) {
     mq.aliases = {
       ...mq.aliases,
-      [alias]: json2mq(mediaQuery as QueryObject),
+      ...aliases2mq({ [alias]: mediaQuery }),
     }
   } else if (typeof alias !== 'string') {
     mq.aliases = {
@@ -155,7 +116,7 @@ export const removeAlias = (mq: Mq, alias: string): void => {
   mq.aliases = remainingAliases
 }
 
-const createFineMediaQueries = (aliases: { [key: string]: MediaQueryString | QueryObject } = {}, defaultMatchedMq: MatchingAliases = {}): FineMediaQueries => {
+const createFineMediaQueries = (aliases: { [key: string]: MediaQueryObject } = {}, defaultMatchedMq: MatchingAliases = {}): FineMediaQueries => {
   const mq: Mq = {
     aliases: aliases2mq(aliases),
     matchingAliases: defaultMatchedMq,
@@ -169,10 +130,12 @@ const createFineMediaQueries = (aliases: { [key: string]: MediaQueryString | Que
     setMatchingAliases: (matchingAliases: MatchingAliases = {}) => setMatchingAliases(mq, matchingAliases),
     on: (aliasOrMediaQuery: string, callback: MediaQueryMatcherHandler) => on(mq, aliasOrMediaQuery, callback),
     off: (aliasOrMediaQuery?: string, callback?: MediaQueryMatcherHandler) => off(mq, aliasOrMediaQuery, callback),
-    alias: (alias: string | { [key: string]: MediaQueryString | QueryObject }, mediaQuery?: MediaQueryString | QueryObject) => addAlias(mq, alias, mediaQuery),
-    unalias: (alias: string) => removeAlias(mq, alias),
+    addAlias: (alias: string | { [key: string]: MediaQueryObject }, mediaQuery?: MediaQueryToMatch | QueryObject) => addAlias(mq, alias, mediaQuery),
+    removeAlias: (alias: string) => removeAlias(mq, alias),
   }
 }
+
+export default createFineMediaQueries
 
 export const FineMqPlugin = {
   install (app: any, options: { aliases?: MediaQueryAliases, defaultMatchingAliases?: MatchingAliases } = {}) {
@@ -186,12 +149,13 @@ export const FineMqPlugin = {
 
     const fineMq = createFineMediaQueries(options.aliases, options.defaultMatchingAliases)
 
-    const onMqMatchEvent: MediaQueryMatcherHandler = ({ matches, alias, ...t }) => {
-      if (alias in reactiveSource.matchingAliases) {
-        reactiveSource.matchingAliases[alias] = matches
-      } else {
-        reactiveSource.matchingAliases = { ...reactiveSource.matchingAliases, [alias]: matches }
+    const onMqMatchEvent: MediaQueryMatcherHandler = ({ matches, alias, mediaQuery }) => {
+      const aliases = getAliasesForMediaQuery(fineMq.mq, mediaQuery)
+      const matchingAliases: MatchingAliases = {}
+      for (const _alias of aliases) {
+        matchingAliases[_alias] = matches
       }
+      reactiveSource.matchingAliases = { ...reactiveSource.matchingAliases, ...matchingAliases }
       if (matches) reactiveSource.lastActiveAlias = alias
     }
 
@@ -225,5 +189,3 @@ export const FineMqPlugin = {
     // app.config.globalProperties.$fineMq = fineMq
   },
 }
-
-export default createFineMediaQueries
