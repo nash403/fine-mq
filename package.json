@@ -46,12 +46,16 @@
     "version": "semantic-release",
     "reset-hard": "git clean -dfx && git reset --hard && npm i",
     "prepare-release": "run-s reset-hard test cov:check doc:html semantic-release doc:publish",
-    "commit": "./node_modules/cz-customizable/standalone.js"
+    "commit": "./node_modules/cz-customizable/standalone.js",
+    "clean": "rm -rf build .nyc_output"
   },
   "engines": {
     "node": ">=10"
   },
-  "dependencies": {},
+  "dependencies": {
+    "@types/json2mq": "^0.2.0",
+    "json2mq": "^0.2.0"
+  },
   "devDependencies": {
     "@ava/typescript": "^1.1.1",
     "@commitlint/cli": "^11.0.0",
@@ -86,6 +90,7 @@
   "files": [
     "build/main",
     "build/module",
+    "nuxt/",
     "!**/*.spec.*",
     "!**/*.json",
     "CHANGELOG.md",
