@@ -18,7 +18,7 @@ export type MediaQueryMatchListener = {
   readonly listener: (e: MediaQueryListEvent | { matches: boolean; }) => void;
 };
 
-export type MediaQueryObject = string | MediaQueryToMatch | QueryObject;
+export type MediaQueryObject = string | number | [number, number?] | MediaQueryToMatch | QueryObject;
 
 export type MediaQueryObjectWithShortcuts = MediaQueryObject | number | [number, number?];
 

@@ -1,4 +1,4 @@
-import { default as json2mq, QueryObject } from 'json2mq'
+import { default as _json2mq, QueryObject } from 'json2mq'
 
 import { MediaQueryAliases, MediaQueryObject, MediaQueryObjectWithShortcuts } from "./types"
 
@@ -73,13 +73,15 @@ export const expandAliases = (aliases: { [key: string]: MediaQueryObjectWithShor
   return aliasesWithModifiers
 }
 
-export const aliases2mq = (aliases: { [key: string]: MediaQueryObjectWithShortcuts }): MediaQueryAliases => {
+export const aliases2mq = (aliases: string | { [key: string]: MediaQueryObjectWithShortcuts }): MediaQueryAliases => {
   const mqAliases: MediaQueryAliases = {}
-  const aliasesExpanded = expandAliases(aliases)
+  const aliasesExpanded = expandAliases(typeof aliases === 'string' ? { [aliases]: aliases } : aliases)
 
   for (const [_alias, _mediaQuery] of Object.entries(aliasesExpanded)) {
-    mqAliases[_alias] = json2mq(_mediaQuery as QueryObject)
+    mqAliases[_alias] = _json2mq(_mediaQuery as QueryObject)
   }
 
   return mqAliases
 }
+
+export const json2mq = (mq: MediaQueryObjectWithShortcuts): string => aliases2mq({ '_': mq })['_']
