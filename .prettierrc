@@ -1,7 +1,17 @@
-printWidth: 120
-tabWidth: 2
-useTabs: false
-singleQuote: true
-semi: false
-trailingComma: 'none'
-bracketSpacing: true
+{
+  "semi": false,
+  "singleQuote": true,
+  "trailingComma": "es5",
+  "bracketSpacing": true,
+  "vueIndentScriptAndStyle": true,
+  "arrowParens": "always",
+  "endOfLine": "lf",
+  "htmlWhitespaceSensitivity": "strict",
+  "jsxBracketSameLine": false,
+  "jsxSingleQuote": true,
+  "printWidth": 130,
+  "proseWrap": "never",
+  "quoteProps": "as-needed",
+  "tabWidth": 2,
+  "useTabs": false
+}

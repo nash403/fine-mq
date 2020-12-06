@@ -1,0 +1,6 @@
+.eslintrc.js
+.cz-config.js
+commitlint.config.js
+husky.config.js
+release.config.js
+nuxt/
