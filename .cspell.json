@@ -21,7 +21,16 @@
     "sandboxed",
     "transpiled",
     "typedoc",
-    "untracked"
+    "untracked",
+    "Nuxt",
+    "finemq",
+    "everytime",
+    "unregister",
+    "screensize",
+    "tanem",
+    "Alexandre",
+    "Nuxt",
+    "akiran"
   ],
   "flagWords": [],
   "ignorePaths": [

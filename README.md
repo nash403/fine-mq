@@ -105,7 +105,7 @@ Vue.use(FineMqPlugin, {
 
 ### const mq = createFineMediaQueries(aliases, defaultMatchedMediaQueries)
 
-Initialise helpers for your media query aliases. Other aliases can be registered afterwards.
+Initialize helpers for your media query aliases. Other aliases can be registered afterwards.
 
 `defaultMatchedMediaQueries` is for universal apps that need default values on SSR.
 

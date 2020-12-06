@@ -1,25 +1,29 @@
 import { default as _json2mq, QueryObject } from 'json2mq'
 
-import { MediaQueryAliases, MediaQueryObject, MediaQueryObjectWithShortcuts } from "./types"
+import { MediaQueryAliases, MediaQueryObject, MediaQueryObjectWithShortcuts } from './types'
 
 export const parseUnitValue = (v: any) => (Number.isFinite(+v) ? `${+v}px` : v)
 
-export const isUnitValue = (v: any) => Number.isFinite(+v) || (typeof v === 'string' && (['px', 'em'].includes(v.slice(-2)) || 'rem' === v.slice(-2)))
+export const isUnitValue = (v: any) =>
+  Number.isFinite(+v) || (typeof v === 'string' && (['px', 'em'].includes(v.slice(-2)) || 'rem' === v.slice(-2)))
 
 export const isDimension = (v: any) =>
-  (Array.isArray(v) && v.length && v.length <= 2 && v.every(_v => _v === Infinity || isUnitValue(_v))) || isUnitValue(v)
-
+  (Array.isArray(v) && v.length && v.length <= 2 && v.every((_v) => _v === Infinity || isUnitValue(_v))) || isUnitValue(v)
 
 type MqDimension = string | number
-export const extractDimensionModifiers = (alias: string, [lower, ]: [MqDimension, MqDimension], lowerValuesForModifiers: { [key in '+' | '!']: MqDimension }) => {
+export const extractDimensionModifiers = (
+  alias: string,
+  [lower]: [MqDimension, MqDimension],
+  lowerValuesForModifiers: { [key in '+' | '!']: MqDimension }
+) => {
   const modifiers: { [key: string]: any } = {}
   if (lowerValuesForModifiers['+'] !== Infinity && typeof lowerValuesForModifiers['+'] !== 'undefined') {
     modifiers[`${alias}+`] = {
-      minWidth: lowerValuesForModifiers['+']
+      minWidth: lowerValuesForModifiers['+'],
     }
     if (lower !== '0px' && lower !== '0em') {
       modifiers[`${alias}!`] = {
-        minWidth: lower
+        minWidth: lower,
       }
     }
   }
@@ -84,4 +88,4 @@ export const aliases2mq = (aliases: string | { [key: string]: MediaQueryObjectWi
   return mqAliases
 }
 
-export const json2mq = (mq: MediaQueryObjectWithShortcuts): string => aliases2mq({ '_': mq })['_']
+export const json2mq = (mq: MediaQueryObjectWithShortcuts): string => aliases2mq({ _: mq })['_']
