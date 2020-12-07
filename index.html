@@ -1,3 +1,350 @@
-<!DOCTYPE html><!--[if lt IE 7]>      <html class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]--><!--[if IE 7]>         <html class="no-js lt-ie9 lt-ie8"> <![endif]--><!--[if IE 8]>         <html class="no-js lt-ie9"> <![endif]--><!--[if gt IE 8]><!--><html class="no-js"><!--<![endif]--><head><meta charset="utf-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><title>Fine Media Queries</title><meta name="description" content="A fine API to manage media queries in JS with ease and with first-class integration with VueJS."><meta name="viewport" content="width=device-width,initial-scale=1"><link rel="stylesheet" href="https://unpkg.com/mustard-ui"><link rel="stylesheet" href="https://unpkg.com/prismjs/themes/prism.css"><script src="https://unpkg.com/prismjs"></script><script src="https://unpkg.com/vue-prism-component"></script><link href="/fine-mq/main.f7f887c9.css" rel="stylesheet"></head><body><!--[if lt IE 7]>
-      <p class="browsehappy">You are using an <strong>outdated</strong> browser. Please <a href="#">upgrade your browser</a> to improve your experience.</p>
-      <![endif]--><div id="app"></div><script type="text/javascript" src="/fine-mq/vendors~main.a66d12f7.js"></script><script type="text/javascript" src="/fine-mq/main.24414bd6.js"></script></body></html>
+<!doctype html>
+<html class="default no-js">
+<head>
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<title>fine-mq</title>
+	<meta name="description" content="Documentation for fine-mq">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<link rel="stylesheet" href="assets/css/main.css">
+</head>
+<body>
+<header>
+	<div class="tsd-page-toolbar">
+		<div class="container">
+			<div class="table-wrap">
+				<div class="table-cell" id="tsd-search" data-index="assets/js/search.json" data-base=".">
+					<div class="field">
+						<label for="tsd-search-field" class="tsd-widget search no-caption">Search</label>
+						<input id="tsd-search-field" type="text" />
+					</div>
+					<ul class="results">
+						<li class="state loading">Preparing search index...</li>
+						<li class="state failure">The search index is not available</li>
+					</ul>
+					<a href="index.html" class="title">fine-mq</a>
+				</div>
+				<div class="table-cell" id="tsd-widgets">
+					<div id="tsd-filter">
+						<a href="#" class="tsd-widget options no-caption" data-toggle="options">Options</a>
+						<div class="tsd-filter-group">
+							<div class="tsd-select" id="tsd-filter-visibility">
+								<span class="tsd-select-label">All</span>
+								<ul class="tsd-select-list">
+									<li data-value="public">Public</li>
+									<li data-value="protected">Public/Protected</li>
+									<li data-value="private" class="selected">All</li>
+								</ul>
+							</div>
+							<input type="checkbox" id="tsd-filter-inherited" checked />
+							<label class="tsd-widget" for="tsd-filter-inherited">Inherited</label>
+							<input type="checkbox" id="tsd-filter-externals" checked />
+							<label class="tsd-widget" for="tsd-filter-externals">Externals</label>
+							<input type="checkbox" id="tsd-filter-only-exported" />
+							<label class="tsd-widget" for="tsd-filter-only-exported">Only exported</label>
+						</div>
+					</div>
+					<a href="#" class="tsd-widget menu no-caption" data-toggle="menu">Menu</a>
+				</div>
+			</div>
+		</div>
+	</div>
+	<div class="tsd-page-title">
+		<div class="container">
+			<ul class="tsd-breadcrumb">
+				<li>
+					<a href="globals.html">Globals</a>
+				</li>
+			</ul>
+			<h1>fine-mq</h1>
+		</div>
+	</div>
+</header>
+<div class="container container-main">
+	<div class="row">
+		<div class="col-8 col-content">
+			<div class="tsd-panel tsd-typography">
+				<a href="#fine-mq" id="fine-mq" style="color: inherit; text-decoration: none;">
+					<h1>fine-mq</h1>
+				</a>
+				<blockquote>
+					<p>A fine API to use media queries in JS with ease and with first-class integration with Vue.js/Nuxt.js.</p>
+				</blockquote>
+				<pre><code class="language-sh"><span class="hljs-comment"># Install using NPM or Yarn:</span>
+npm i --save fine-mq
+<span class="hljs-comment"># or</span>
+yarn add fine-mq</code></pre>
+				<a href="#usage" id="usage" style="color: inherit; text-decoration: none;">
+					<h2>Usage</h2>
+				</a>
+				<a href="#with-the-js-api" id="with-the-js-api" style="color: inherit; text-decoration: none;">
+					<h3>With the JS API</h3>
+				</a>
+				<pre><code class="language-js"><span class="hljs-keyword">import</span> { createFineMediaQueries }  <span class="hljs-keyword">from</span> <span class="hljs-string">&#x27;fine-mq&#x27;</span>
+
+<span class="hljs-keyword">const</span> mq = createFineMediaQueries({
+  <span class="hljs-comment">// Fine Mq supports modifiers for sizes shortcuts  (see below for examples)</span>
+  <span class="hljs-attr">sm</span>: <span class="hljs-number">680</span>, <span class="hljs-comment">// &lt;=&gt; [0, 680]</span>
+  <span class="hljs-attr">md</span>: [<span class="hljs-number">681</span>, <span class="hljs-number">1024</span>],
+  <span class="hljs-attr">lg</span>: [<span class="hljs-number">1025</span>], <span class="hljs-comment">// &lt;=&gt; [1025, Infinity]</span>
+  <span class="hljs-attr">landscape</span>: <span class="hljs-string">&#x27;(orientation: landscape)&#x27;</span>,
+  <span class="hljs-attr">custom1</span>: <span class="hljs-string">&#x27;only screen and (max-width: 480px)&#x27;</span>,
+  <span class="hljs-attr">custom2</span>: <span class="hljs-string">&#x27;only screen and (min-width: 480px) and (max-width: 720px)&#x27;</span>,
+  <span class="hljs-attr">an_alias_object</span>: {
+    <span class="hljs-attr">screen</span>: <span class="hljs-literal">true</span>,
+    <span class="hljs-attr">minWidth</span>: <span class="hljs-string">&#x27;23em&#x27;</span>,
+    <span class="hljs-attr">maxWidth</span>: <span class="hljs-string">&#x27;768px&#x27;</span>
+  }
+})
+
+<span class="hljs-comment">// =&gt; This example will register the following aliases:</span>
+<span class="hljs-comment">// {</span>
+<span class="hljs-comment">//   sm: &#x27;(max-width: 680px)&#x27;,</span>
+<span class="hljs-comment">//   &#x27;sm+&#x27;: &#x27;(min-width: 681px)&#x27;,</span>
+<span class="hljs-comment">//   md: &#x27;(min-width: 681px) and (max-width: 1024px)&#x27;,</span>
+<span class="hljs-comment">//   &#x27;md+&#x27;: &#x27;(min-width: 1025px)&#x27;,</span>
+<span class="hljs-comment">//   &#x27;md!&#x27;: &#x27;(min-width: 681px)&#x27;,</span>
+<span class="hljs-comment">//   lg: &#x27;(min-width: 1025px)&#x27;,</span>
+<span class="hljs-comment">//   landscape: &#x27;(orientation: landscape)&#x27;,</span>
+<span class="hljs-comment">//   an_alias_name: &#x27;screen and (min-width: 380px) and (max-width: 768px)&#x27;</span>
+<span class="hljs-comment">// }</span>
+
+<span class="hljs-comment">// !: means «current and above»</span>
+<span class="hljs-comment">// +: means «above»</span>
+
+<span class="hljs-keyword">const</span> defaultColor = <span class="hljs-string">&#x27;#FFF&#x27;</span>
+
+<span class="hljs-keyword">const</span> changeColor = <span class="hljs-function"><span class="hljs-params">color</span> =&gt;</span> <span class="hljs-function">(<span class="hljs-params">{ matches, mediaQuery, alias }</span>) =&gt;</span> {
+  <span class="hljs-built_in">document</span>.body.style.backgroundColor = matches ? color : defaultColor
+}
+
+mq.on(<span class="hljs-string">&#x27;small&#x27;</span>, changeColor(<span class="hljs-string">&#x27;blue&#x27;</span>))
+mq.on(<span class="hljs-string">&#x27;medium&#x27;</span>, changeColor(<span class="hljs-string">&#x27;green&#x27;</span>))
+mq.on({
+  <span class="hljs-attr">screen</span>: <span class="hljs-literal">true</span>,
+  <span class="hljs-attr">maxWidth</span>: <span class="hljs-string">&#x27;1200px&#x27;</span>
+}, changeColor(<span class="hljs-string">&#x27;cyan&#x27;</span>))
+mq.on(<span class="hljs-string">&#x27;only screen and (min-width: 720px)&#x27;</span>, changeColor(<span class="hljs-string">&#x27;red&#x27;</span>))
+mq.off(<span class="hljs-string">&#x27;only screen and (min-width: 720px)&#x27;</span>)</code></pre>
+				<p><em><strong>NOTE 1:</strong></em> Absurd modifiers will not be created for  (ex: when the lower bound is <em>0</em>, there is no need for the «!» modifier, or if the upper bound is <em>Infinity</em>, there is no need for both «!» and «+» modifiers).</p>
+				<p><em><strong>NOTE 2:</strong></em> If you specify the unit for your size (<code>px</code>, <code>em</code>, <code>rem</code>), the <code>+ 1</code> operation will not be performed for modifiers.</p>
+				<p>See <a href="#finemq-api-description">FineMq</a> for details about the API.</p>
+				<a href="#as-a-vue-plugin" id="as-a-vue-plugin" style="color: inherit; text-decoration: none;">
+					<h3>As a Vue plugin</h3>
+				</a>
+				<pre><code class="language-js"><span class="hljs-keyword">import</span> { FineMqPlugin } <span class="hljs-keyword">from</span> <span class="hljs-string">&#x27;fine-mq&#x27;</span>
+
+
+<span class="hljs-comment">// Define your aliases as plugin options (defaults to `{ sm: 680, md: [681, 1024], lg: [1025] }` for Vue.js only, not the JS API)</span>
+Vue.use(FineMqPlugin, {
+  <span class="hljs-attr">aliases</span>: {
+    <span class="hljs-attr">sm</span>: <span class="hljs-number">680</span>, <span class="hljs-comment">// &lt;=&gt; [0, 680], can also be a size in px, em or rem</span>
+    <span class="hljs-attr">md</span>: [<span class="hljs-number">681</span>, <span class="hljs-number">1024</span>],
+    <span class="hljs-attr">lg</span>: [<span class="hljs-number">1025</span>], <span class="hljs-comment">// &lt;=&gt; [1025, Infinity]</span>
+    <span class="hljs-attr">landscape</span>: <span class="hljs-string">&#x27;(orientation: landscape)&#x27;</span>,
+    <span class="hljs-attr">an_alias_name</span>: {
+      <span class="hljs-attr">screen</span>: <span class="hljs-literal">true</span>,
+      <span class="hljs-attr">minWidth</span>: <span class="hljs-string">&#x27;23em&#x27;</span>,
+      <span class="hljs-attr">maxWidth</span>: <span class="hljs-string">&#x27;768px&#x27;</span>
+    }
+  }
+  <span class="hljs-comment">// Define the default values for your matching aliases for SSR</span>
+  <span class="hljs-attr">defaultMatchedMediaQueries</span>: {
+    <span class="hljs-attr">sm</span>: <span class="hljs-literal">false</span>,
+    <span class="hljs-attr">md</span>: <span class="hljs-literal">false</span>,
+    <span class="hljs-attr">lg</span>: <span class="hljs-literal">true</span>,
+  }
+})
+
+<span class="hljs-comment">// Three reactive properties will then be available on Vue instances:</span>
+<span class="hljs-comment">// - `$mq` is an object that contains the matching state for each alias in the form { [alias]: true/false }.</span>
+<span class="hljs-comment">// - `$lastActiveAlias` will contain the last alias that was matched and triggered by the listener.</span>
+<span class="hljs-comment">// - `$fineMq` is a FineMq instance for advanced usages.</span></code></pre>
+				<a href="#finemq-api-description" id="finemq-api-description" style="color: inherit; text-decoration: none;">
+					<h2>FineMq API description</h2>
+				</a>
+				<a href="#const-mq--createfinemediaqueriesaliases-defaultmatchedmediaqueries" id="const-mq--createfinemediaqueriesaliases-defaultmatchedmediaqueries" style="color: inherit; text-decoration: none;">
+					<h3>const mq = createFineMediaQueries(aliases, defaultMatchedMediaQueries)</h3>
+				</a>
+				<p>Initialize helpers for your media query aliases. Other aliases can be registered afterwards.</p>
+				<p><code>defaultMatchedMediaQueries</code> is for universal apps that need default values on SSR.</p>
+				<a href="#mqaddaliasalias-query--mqremovealiasalias" id="mqaddaliasalias-query--mqremovealiasalias" style="color: inherit; text-decoration: none;">
+					<h3>mq.addAlias(alias[, query]) / mq.removeAlias(alias)</h3>
+				</a>
+				<p>Register an <code>alias</code> for a <code>query</code>, or register multiple aliases at once by passing an object.</p>
+				<pre><code class="language-js">mq.addAlias(<span class="hljs-string">&#x27;small&#x27;</span>, <span class="hljs-string">&#x27;(max-width: 100px)&#x27;</span>)
+mq.addAlias({
+  <span class="hljs-attr">small</span>: <span class="hljs-string">&#x27;(max-width: 100px)&#x27;</span>,
+  <span class="hljs-attr">medium</span>: {
+    <span class="hljs-attr">screen</span>: <span class="hljs-literal">true</span>,
+    <span class="hljs-attr">maxWidth</span>: <span class="hljs-number">200</span>
+  },
+})</code></pre>
+				<p>Then you can unregister previously registered aliases with <code>mq.removeAlias(alias)</code>.</p>
+				<a href="#mqonquery-callback" id="mqonquery-callback" style="color: inherit; text-decoration: none;">
+					<h3>mq.on(query, callback)</h3>
+				</a>
+				<p>Register a <code>callback</code> which will be executed everytime the match state (true/false) for a query or alias changes.</p>
+				<pre><code class="language-js"><span class="hljs-comment">// `alias` is the given alias, mediaQuery is the actual media query matched and `matches` is a boolean indicating the match state.</span>
+mq.on(<span class="hljs-string">&#x27;(max-width: 400px)&#x27;</span>, <span class="hljs-function">(<span class="hljs-params">{ matches, alias, mediaQuery }</span>) =&gt;</span> {})
+mq.on(<span class="hljs-string">&#x27;smartphones&#x27;</span>, <span class="hljs-function">(<span class="hljs-params">{ matches, alias, mediaQuery }</span>) =&gt;</span> {}, {})</code></pre>
+				<a href="#mqoffquery-callback" id="mqoffquery-callback" style="color: inherit; text-decoration: none;">
+					<h3>mq.off(query, callback)</h3>
+				</a>
+				<p>Remove all handlers for all media queries:</p>
+				<pre><code class="language-js">mq.off()</code></pre>
+				<p>Remove all handlers for a media query or alias:</p>
+				<pre><code class="language-js">mq.off(<span class="hljs-string">&#x27;(max-width: 400px)&#x27;</span>)
+mq.off(<span class="hljs-string">&#x27;small&#x27;</span>)</code></pre>
+				<p>Remove a specific handler for a query or alias:</p>
+				<pre><code class="language-js">mq.off(<span class="hljs-string">&#x27;(max-width: 400px)&#x27;</span>, myHandler)
+mq.off(<span class="hljs-string">&#x27;small&#x27;</span>, myHandler)</code></pre>
+				<a href="#browser-support" id="browser-support" style="color: inherit; text-decoration: none;">
+					<h2>Browser Support</h2>
+				</a>
+				<p>This library relies on matchMedia API to detect screensize change. You can use a polyfill if you need this package to work for older browsers. Check this out:
+				Paul Irish: <a href="https://github.com/paulirish/matchMedia.js">matchMedia polyfill</a></p>
+				<a href="#credits" id="credits" style="color: inherit; text-decoration: none;">
+					<h2>Credits</h2>
+				</a>
+				<p>This package is highly inspired by the work made on other packages (links below), I just shamelessly copied their work and combined them !</p>
+				<ul>
+					<li><a href="https://github.com/tanem/media-query-facade">media-query-facade</a> by @tanem</li>
+					<li><a href="https://github.com/AlexandreBonaventure/vue-mq/">vue-mq</a> by @AlexandreBonaventure</li>
+					<li><a href="https://github.com/akiran/json2mq">json2mq</a> by @akiran</li>
+				</ul>
+				<a href="#contributing" id="contributing" style="color: inherit; text-decoration: none;">
+					<h2>Contributing</h2>
+				</a>
+				<p>Please <a href="https://github.com/nash403/fine-mq/issues/new">open an issue</a> for support. Thanks in advance for any kind of contribution !</p>
+				<ol>
+					<li>Fork it!</li>
+					<li>Create your feature branch: git checkout -b my-new-feature</li>
+					<li>Commit your changes: git commit -am &#39;Add some feature&#39;</li>
+					<li>Push to the branch: git push origin my-new-feature</li>
+					<li>Submit a pull request :D</li>
+				</ol>
+			</div>
+		</div>
+		<div class="col-4 col-menu menu-sticky-wrap menu-highlight">
+			<nav class="tsd-navigation primary">
+				<ul>
+					<li class="globals  ">
+						<a href="globals.html"><em>Globals</em></a>
+					</li>
+				</ul>
+			</nav>
+			<nav class="tsd-navigation secondary menu-sticky">
+				<ul class="before-current">
+					<li class=" tsd-kind-type-alias">
+						<a href="globals.html#finemediaqueries" class="tsd-kind-icon">Fine<wbr>Media<wbr>Queries</a>
+					</li>
+					<li class=" tsd-kind-type-alias">
+						<a href="globals.html#matchingaliases" class="tsd-kind-icon">Matching<wbr>Aliases</a>
+					</li>
+					<li class=" tsd-kind-type-alias">
+						<a href="globals.html#mediaqueryaliases" class="tsd-kind-icon">Media<wbr>Query<wbr>Aliases</a>
+					</li>
+					<li class=" tsd-kind-type-alias">
+						<a href="globals.html#mediaquerymatchlistener" class="tsd-kind-icon">Media<wbr>Query<wbr>Match<wbr>Listener</a>
+					</li>
+					<li class=" tsd-kind-type-alias">
+						<a href="globals.html#mediaquerymatcherhandler" class="tsd-kind-icon">Media<wbr>Query<wbr>Matcher<wbr>Handler</a>
+					</li>
+					<li class=" tsd-kind-type-alias">
+						<a href="globals.html#mediaquerymatcherhandlerparams" class="tsd-kind-icon">Media<wbr>Query<wbr>Matcher<wbr>Handler<wbr>Params</a>
+					</li>
+					<li class=" tsd-kind-type-alias">
+						<a href="globals.html#mediaquerymatchers" class="tsd-kind-icon">Media<wbr>Query<wbr>Matchers</a>
+					</li>
+					<li class=" tsd-kind-type-alias">
+						<a href="globals.html#mediaqueryobject" class="tsd-kind-icon">Media<wbr>Query<wbr>Object</a>
+					</li>
+					<li class=" tsd-kind-type-alias">
+						<a href="globals.html#mediaqueryobjectwithshortcuts" class="tsd-kind-icon">Media<wbr>Query<wbr>Object<wbr>With<wbr>Shortcuts</a>
+					</li>
+					<li class=" tsd-kind-type-alias">
+						<a href="globals.html#mediaquerytomatch" class="tsd-kind-icon">Media<wbr>Query<wbr>ToMatch</a>
+					</li>
+					<li class=" tsd-kind-type-alias">
+						<a href="globals.html#mq" class="tsd-kind-icon">Mq</a>
+					</li>
+					<li class=" tsd-kind-type-alias">
+						<a href="globals.html#mqdimension" class="tsd-kind-icon">Mq<wbr>Dimension</a>
+					</li>
+					<li class=" tsd-kind-function">
+						<a href="globals.html#addalias" class="tsd-kind-icon">add<wbr>Alias</a>
+					</li>
+					<li class=" tsd-kind-function">
+						<a href="globals.html#aliases2mq" class="tsd-kind-icon">aliases2mq</a>
+					</li>
+					<li class=" tsd-kind-function">
+						<a href="globals.html#createfinemediaqueries" class="tsd-kind-icon">create<wbr>Fine<wbr>Media<wbr>Queries</a>
+					</li>
+					<li class=" tsd-kind-function">
+						<a href="globals.html#createnewmediaquerymatchlistener" class="tsd-kind-icon">create<wbr>New<wbr>Media<wbr>Query<wbr>Match<wbr>Listener</a>
+					</li>
+					<li class=" tsd-kind-function">
+						<a href="globals.html#expandaliases" class="tsd-kind-icon">expand<wbr>Aliases</a>
+					</li>
+					<li class=" tsd-kind-function">
+						<a href="globals.html#extractdimensionmodifiers" class="tsd-kind-icon">extract<wbr>Dimension<wbr>Modifiers</a>
+					</li>
+					<li class=" tsd-kind-function">
+						<a href="globals.html#getaliasesformediaquery" class="tsd-kind-icon">get<wbr>Aliases<wbr>For<wbr>Media<wbr>Query</a>
+					</li>
+					<li class=" tsd-kind-function">
+						<a href="globals.html#getmatchlistener" class="tsd-kind-icon">get<wbr>Match<wbr>Listener</a>
+					</li>
+					<li class=" tsd-kind-function">
+						<a href="globals.html#getmediaquerystring" class="tsd-kind-icon">get<wbr>Media<wbr>Query<wbr>String</a>
+					</li>
+					<li class=" tsd-kind-function">
+						<a href="globals.html#isdimension" class="tsd-kind-icon">is<wbr>Dimension</a>
+					</li>
+					<li class=" tsd-kind-function">
+						<a href="globals.html#isunitvalue" class="tsd-kind-icon">is<wbr>Unit<wbr>Value</a>
+					</li>
+					<li class=" tsd-kind-function">
+						<a href="globals.html#json2mq" class="tsd-kind-icon">json2mq</a>
+					</li>
+					<li class=" tsd-kind-function">
+						<a href="globals.html#off" class="tsd-kind-icon">off</a>
+					</li>
+					<li class=" tsd-kind-function">
+						<a href="globals.html#on" class="tsd-kind-icon">on</a>
+					</li>
+					<li class=" tsd-kind-function">
+						<a href="globals.html#parseunitvalue" class="tsd-kind-icon">parse<wbr>Unit<wbr>Value</a>
+					</li>
+					<li class=" tsd-kind-function">
+						<a href="globals.html#removealias" class="tsd-kind-icon">remove<wbr>Alias</a>
+					</li>
+					<li class=" tsd-kind-function">
+						<a href="globals.html#removemediaquerymatchlistener" class="tsd-kind-icon">remove<wbr>Media<wbr>Query<wbr>Match<wbr>Listener</a>
+					</li>
+					<li class=" tsd-kind-function">
+						<a href="globals.html#setmatchingaliases" class="tsd-kind-icon">set<wbr>Matching<wbr>Aliases</a>
+					</li>
+					<li class=" tsd-kind-object-literal">
+						<a href="globals.html#finemqplugin" class="tsd-kind-icon">Fine<wbr>MqPlugin</a>
+					</li>
+				</ul>
+			</nav>
+		</div>
+	</div>
+</div>
+<footer class="with-border-bottom">
+	<div class="container">
+		<h2>Legend</h2>
+		<div class="tsd-legend-group">
+		</div>
+	</div>
+</footer>
+<div class="container tsd-generator">
+	<p>Generated using <a href="https://typedoc.org/" target="_blank">TypeDoc</a></p>
+</div>
+<div class="overlay"></div>
+<script src="assets/js/main.js"></script>
+</body>
+</html>
