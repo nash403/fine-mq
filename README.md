@@ -2,6 +2,8 @@
 
 > A fine API to use media queries in JS with ease and with first-class integration with Vue.js/Nuxt.js.
 
+Read the doc [here](https://nash403.github.io/fine-mq/).
+
 ```sh
 # Install using NPM or Yarn:
 npm i --save fine-mq
@@ -11,7 +13,7 @@ yarn add fine-mq
 
 ## Usage
 
-### With the JS API
+### In JS
 
 ```js
 import { createFineMediaQueries }  from 'fine-mq'
@@ -66,7 +68,7 @@ _**NOTE 1:**_ Absurd modifiers will not be created for  (ex: when the lower boun
 
 _**NOTE 2:**_ If you specify the unit for your size (`px`, `em`, `rem`), the `+ 1` operation will not be performed for modifiers.
 
-See [FineMq](#finemq-api-description) for details about the API.
+See [FineMq](#finemq-api) for details about the API.
 
 ### As a Vue plugin
 
@@ -101,7 +103,39 @@ Vue.use(FineMqPlugin, {
 // - `$fineMq` is a FineMq instance for advanced usages.
 ```
 
-## FineMq API description
+### With Nuxt.js
+
+```js
+// In your nuxt.config.js
+export default {
+  // ...
+  
+  // Build Configuration (https://go.nuxtjs.dev/config-build)
+  build: {
+    transpile: ['fine-mq'],
+  },
+  
+  modules: ['fine-mq/nuxt'],
+
+  // Pass options here
+  fineMq: {
+    defaultMatchingAliases: {
+      md: true,
+    },
+    aliases: {
+      sm: 640,
+      md: [641, 768],
+      lg: [769, 1024],
+      xl: [1025, 1280],
+      '2xl': [1281],
+    },
+  },
+
+  // ...
+}
+```
+
+## FineMq API
 
 ### const mq = createFineMediaQueries(aliases, defaultMatchedMediaQueries)
 

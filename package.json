@@ -16,7 +16,10 @@
     "matchMedia",
     "rwd",
     "json2mq",
-    "object2mediaQuery"
+    "object2mediaQuery",
+    "nuxt",
+    "nuxt-mq",
+    "vue-plugin"
   ],
   "scripts": {
     "build": "run-p build:*",
@@ -44,10 +47,9 @@
     "doc:html": "typedoc src/ --exclude **/*.spec.ts --target ES6 --mode file --out build/docs",
     "doc:json": "typedoc src/ --exclude **/*.spec.ts --target ES6 --mode file --json build/docs/typedoc.json",
     "doc:publish": "gh-pages -m \"[ci skip] Updates\" -d build/docs",
-    "version": "semantic-release",
+    "version": "semantic-release --no-ci",
     "reset-hard": "git clean -dfx && git reset --hard && npm i",
-    "prerelease": "run-s reset-hard doc:html",
-    "release": "run-s version doc:publish",
+    "prepare-release": "run-s reset-hard test doc:html version doc:publish",
     "commit": "./node_modules/cz-customizable/standalone.js",
     "clean": "rm -rf build .nyc_output"
   },
