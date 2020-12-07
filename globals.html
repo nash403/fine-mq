@@ -81,7 +81,7 @@
 								<li class="tsd-kind-type-alias"><a href="globals.html#mediaqueryobjectwithshortcuts" class="tsd-kind-icon">Media<wbr>Query<wbr>Object<wbr>With<wbr>Shortcuts</a></li>
 								<li class="tsd-kind-type-alias"><a href="globals.html#mediaquerytomatch" class="tsd-kind-icon">Media<wbr>Query<wbr>ToMatch</a></li>
 								<li class="tsd-kind-type-alias"><a href="globals.html#mq" class="tsd-kind-icon">Mq</a></li>
-								<li class="tsd-kind-type-alias"><a href="globals.html#mqdimension" class="tsd-kind-icon">Mq<wbr>Dimension</a></li>
+								<li class="tsd-kind-type-alias"><a href="globals.html#mqdimensionboundaries" class="tsd-kind-icon">Mq<wbr>Dimension<wbr>Boundaries</a></li>
 							</ul>
 						</section>
 						<section class="tsd-index-section ">
@@ -92,19 +92,22 @@
 								<li class="tsd-kind-function"><a href="globals.html#createfinemediaqueries" class="tsd-kind-icon">create<wbr>Fine<wbr>Media<wbr>Queries</a></li>
 								<li class="tsd-kind-function"><a href="globals.html#createnewmediaquerymatchlistener" class="tsd-kind-icon">create<wbr>New<wbr>Media<wbr>Query<wbr>Match<wbr>Listener</a></li>
 								<li class="tsd-kind-function"><a href="globals.html#expandaliases" class="tsd-kind-icon">expand<wbr>Aliases</a></li>
-								<li class="tsd-kind-function"><a href="globals.html#extractdimensionmodifiers" class="tsd-kind-icon">extract<wbr>Dimension<wbr>Modifiers</a></li>
+								<li class="tsd-kind-function"><a href="globals.html#getaliasmodifiers" class="tsd-kind-icon">get<wbr>Alias<wbr>Modifiers</a></li>
 								<li class="tsd-kind-function"><a href="globals.html#getaliasesformediaquery" class="tsd-kind-icon">get<wbr>Aliases<wbr>For<wbr>Media<wbr>Query</a></li>
+								<li class="tsd-kind-function"><a href="globals.html#getdimensionbounds" class="tsd-kind-icon">get<wbr>Dimension<wbr>Bounds</a></li>
 								<li class="tsd-kind-function"><a href="globals.html#getmatchlistener" class="tsd-kind-icon">get<wbr>Match<wbr>Listener</a></li>
 								<li class="tsd-kind-function"><a href="globals.html#getmediaquerystring" class="tsd-kind-icon">get<wbr>Media<wbr>Query<wbr>String</a></li>
+								<li class="tsd-kind-function"><a href="globals.html#getunshortenedmqobject" class="tsd-kind-icon">get<wbr>Unshortened<wbr>MqObject</a></li>
 								<li class="tsd-kind-function"><a href="globals.html#isdimension" class="tsd-kind-icon">is<wbr>Dimension</a></li>
 								<li class="tsd-kind-function"><a href="globals.html#isunitvalue" class="tsd-kind-icon">is<wbr>Unit<wbr>Value</a></li>
 								<li class="tsd-kind-function"><a href="globals.html#json2mq" class="tsd-kind-icon">json2mq</a></li>
 								<li class="tsd-kind-function"><a href="globals.html#off" class="tsd-kind-icon">off</a></li>
 								<li class="tsd-kind-function"><a href="globals.html#on" class="tsd-kind-icon">on</a></li>
-								<li class="tsd-kind-function"><a href="globals.html#parseunitvalue" class="tsd-kind-icon">parse<wbr>Unit<wbr>Value</a></li>
+								<li class="tsd-kind-function"><a href="globals.html#parsetopxorkeepvalue" class="tsd-kind-icon">parse<wbr>ToPx<wbr>OrKeep<wbr>Value</a></li>
 								<li class="tsd-kind-function"><a href="globals.html#removealias" class="tsd-kind-icon">remove<wbr>Alias</a></li>
 								<li class="tsd-kind-function"><a href="globals.html#removemediaquerymatchlistener" class="tsd-kind-icon">remove<wbr>Media<wbr>Query<wbr>Match<wbr>Listener</a></li>
 								<li class="tsd-kind-function"><a href="globals.html#setmatchingaliases" class="tsd-kind-icon">set<wbr>Matching<wbr>Aliases</a></li>
+								<li class="tsd-kind-function"><a href="globals.html#unshortenaliasmq" class="tsd-kind-icon">unshorten<wbr>Alias<wbr>Mq</a></li>
 							</ul>
 						</section>
 						<section class="tsd-index-section ">
@@ -124,7 +127,7 @@
 					<div class="tsd-signature tsd-kind-icon">Fine<wbr>Media<wbr>Queries<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-symbol">{ </span>addAlias<span class="tsd-signature-symbol">: </span><span class="tsd-signature-symbol">(</span>alias<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-symbol">{}</span>, mediaQuery<span class="tsd-signature-symbol">?: </span><a href="globals.html#mediaquerytomatch" class="tsd-signature-type">MediaQueryToMatch</a><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">QueryObject</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol"> =&gt; </span><span class="tsd-signature-type">void</span><span class="tsd-signature-symbol">; </span>mq<span class="tsd-signature-symbol">: </span><a href="globals.html#mq" class="tsd-signature-type">Mq</a><span class="tsd-signature-symbol">; </span>off<span class="tsd-signature-symbol">: </span><span class="tsd-signature-symbol">(</span>aliasOrMediaQuery<span class="tsd-signature-symbol">?: </span><span class="tsd-signature-type">undefined</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">string</span>, callback<span class="tsd-signature-symbol">?: </span><a href="globals.html#mediaquerymatcherhandler" class="tsd-signature-type">MediaQueryMatcherHandler</a><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol"> =&gt; </span><span class="tsd-signature-type">void</span><span class="tsd-signature-symbol">; </span>on<span class="tsd-signature-symbol">: </span><span class="tsd-signature-symbol">(</span>aliasOrMediaQuery<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span>, callback<span class="tsd-signature-symbol">: </span><a href="globals.html#mediaquerymatcherhandler" class="tsd-signature-type">MediaQueryMatcherHandler</a><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol"> =&gt; </span><span class="tsd-signature-type">void</span><span class="tsd-signature-symbol">; </span>removeAlias<span class="tsd-signature-symbol">: </span><span class="tsd-signature-symbol">(</span>alias<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol"> =&gt; </span><span class="tsd-signature-type">void</span><span class="tsd-signature-symbol">; </span>setMatchingAliases<span class="tsd-signature-symbol">: </span><span class="tsd-signature-symbol">(</span>matchingAliases<span class="tsd-signature-symbol">: </span><a href="globals.html#matchingaliases" class="tsd-signature-type">MatchingAliases</a><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol"> =&gt; </span><span class="tsd-signature-type">void</span><span class="tsd-signature-symbol"> }</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/nash403/fine-mq/blob/d9259de/src/lib/types.ts#L42">lib/types.ts:42</a></li>
+							<li>Defined in <a href="https://github.com/nash403/fine-mq/blob/b4879ff/src/lib/types.ts#L42">lib/types.ts:42</a></li>
 						</ul>
 					</aside>
 					<div class="tsd-type-declaration">
@@ -256,7 +259,7 @@
 					<div class="tsd-signature tsd-kind-icon">Matching<wbr>Aliases<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-symbol">{}</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/nash403/fine-mq/blob/d9259de/src/lib/types.ts#L32">lib/types.ts:32</a></li>
+							<li>Defined in <a href="https://github.com/nash403/fine-mq/blob/b4879ff/src/lib/types.ts#L32">lib/types.ts:32</a></li>
 						</ul>
 					</aside>
 					<div class="tsd-type-declaration">
@@ -274,7 +277,7 @@
 					<div class="tsd-signature tsd-kind-icon">Media<wbr>Query<wbr>Aliases<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-symbol">{}</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/nash403/fine-mq/blob/d9259de/src/lib/types.ts#L24">lib/types.ts:24</a></li>
+							<li>Defined in <a href="https://github.com/nash403/fine-mq/blob/b4879ff/src/lib/types.ts#L24">lib/types.ts:24</a></li>
 						</ul>
 					</aside>
 					<div class="tsd-type-declaration">
@@ -292,7 +295,7 @@
 					<div class="tsd-signature tsd-kind-icon">Media<wbr>Query<wbr>Match<wbr>Listener<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-symbol">{ </span>handlers<span class="tsd-signature-symbol">: </span><a href="globals.html#mediaquerymatcherhandler" class="tsd-signature-type">MediaQueryMatcherHandler</a><span class="tsd-signature-symbol">[]</span><span class="tsd-signature-symbol">; </span>listener<span class="tsd-signature-symbol">: </span><span class="tsd-signature-symbol">(</span>e<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">MediaQueryListEvent</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-symbol">{ </span>matches<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">boolean</span><span class="tsd-signature-symbol"> }</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol"> =&gt; </span><span class="tsd-signature-type">void</span><span class="tsd-signature-symbol">; </span>matcher<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">MediaQueryList</span><span class="tsd-signature-symbol"> }</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/nash403/fine-mq/blob/d9259de/src/lib/types.ts#L14">lib/types.ts:14</a></li>
+							<li>Defined in <a href="https://github.com/nash403/fine-mq/blob/b4879ff/src/lib/types.ts#L14">lib/types.ts:14</a></li>
 						</ul>
 					</aside>
 					<div class="tsd-type-declaration">
@@ -334,7 +337,7 @@
 					<div class="tsd-signature tsd-kind-icon">Media<wbr>Query<wbr>Matcher<wbr>Handler<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-symbol">(</span>matchedMq<span class="tsd-signature-symbol">: </span><a href="globals.html#mediaquerymatcherhandlerparams" class="tsd-signature-type">MediaQueryMatcherHandlerParams</a><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol"> =&gt; </span><span class="tsd-signature-type">void</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/nash403/fine-mq/blob/d9259de/src/lib/types.ts#L12">lib/types.ts:12</a></li>
+							<li>Defined in <a href="https://github.com/nash403/fine-mq/blob/b4879ff/src/lib/types.ts#L12">lib/types.ts:12</a></li>
 						</ul>
 					</aside>
 					<div class="tsd-type-declaration">
@@ -365,7 +368,7 @@
 					<div class="tsd-signature tsd-kind-icon">Media<wbr>Query<wbr>Matcher<wbr>Handler<wbr>Params<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-symbol">{ </span>alias<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">; </span>matches<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">boolean</span><span class="tsd-signature-symbol">; </span>mediaQuery<span class="tsd-signature-symbol">: </span><a href="globals.html#mediaquerytomatch" class="tsd-signature-type">MediaQueryToMatch</a><span class="tsd-signature-symbol"> }</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/nash403/fine-mq/blob/d9259de/src/lib/types.ts#L6">lib/types.ts:6</a></li>
+							<li>Defined in <a href="https://github.com/nash403/fine-mq/blob/b4879ff/src/lib/types.ts#L6">lib/types.ts:6</a></li>
 						</ul>
 					</aside>
 					<div class="tsd-type-declaration">
@@ -389,7 +392,7 @@
 					<div class="tsd-signature tsd-kind-icon">Media<wbr>Query<wbr>Matchers<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-symbol">{}</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/nash403/fine-mq/blob/d9259de/src/lib/types.ts#L28">lib/types.ts:28</a></li>
+							<li>Defined in <a href="https://github.com/nash403/fine-mq/blob/b4879ff/src/lib/types.ts#L28">lib/types.ts:28</a></li>
 						</ul>
 					</aside>
 					<div class="tsd-type-declaration">
@@ -407,7 +410,7 @@
 					<div class="tsd-signature tsd-kind-icon">Media<wbr>Query<wbr>Object<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">string</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">number</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-symbol">[</span><span class="tsd-signature-type">number</span><span class="tsd-signature-symbol">, </span><span class="tsd-signature-type">undefined</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">number</span><span class="tsd-signature-symbol">]</span><span class="tsd-signature-symbol"> | </span><a href="globals.html#mediaquerytomatch" class="tsd-signature-type">MediaQueryToMatch</a><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">QueryObject</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/nash403/fine-mq/blob/d9259de/src/lib/types.ts#L20">lib/types.ts:20</a></li>
+							<li>Defined in <a href="https://github.com/nash403/fine-mq/blob/b4879ff/src/lib/types.ts#L20">lib/types.ts:20</a></li>
 						</ul>
 					</aside>
 				</section>
@@ -417,7 +420,7 @@
 					<div class="tsd-signature tsd-kind-icon">Media<wbr>Query<wbr>Object<wbr>With<wbr>Shortcuts<span class="tsd-signature-symbol">:</span> <a href="globals.html#mediaqueryobject" class="tsd-signature-type">MediaQueryObject</a><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">number</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-symbol">[</span><span class="tsd-signature-type">number</span><span class="tsd-signature-symbol">, </span><span class="tsd-signature-type">undefined</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">number</span><span class="tsd-signature-symbol">]</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/nash403/fine-mq/blob/d9259de/src/lib/types.ts#L22">lib/types.ts:22</a></li>
+							<li>Defined in <a href="https://github.com/nash403/fine-mq/blob/b4879ff/src/lib/types.ts#L22">lib/types.ts:22</a></li>
 						</ul>
 					</aside>
 				</section>
@@ -427,7 +430,7 @@
 					<div class="tsd-signature tsd-kind-icon">Media<wbr>Query<wbr>ToMatch<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">string</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/nash403/fine-mq/blob/d9259de/src/lib/types.ts#L4">lib/types.ts:4</a></li>
+							<li>Defined in <a href="https://github.com/nash403/fine-mq/blob/b4879ff/src/lib/types.ts#L4">lib/types.ts:4</a></li>
 						</ul>
 					</aside>
 				</section>
@@ -437,7 +440,7 @@
 					<div class="tsd-signature tsd-kind-icon">Mq<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-symbol">{ </span>aliases<span class="tsd-signature-symbol">: </span><a href="globals.html#mediaqueryaliases" class="tsd-signature-type">MediaQueryAliases</a><span class="tsd-signature-symbol">; </span>matchers<span class="tsd-signature-symbol">: </span><a href="globals.html#mediaquerymatchers" class="tsd-signature-type">MediaQueryMatchers</a><span class="tsd-signature-symbol">; </span>matchingAliases<span class="tsd-signature-symbol">: </span><a href="globals.html#matchingaliases" class="tsd-signature-type">MatchingAliases</a><span class="tsd-signature-symbol"> }</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/nash403/fine-mq/blob/d9259de/src/lib/types.ts#L36">lib/types.ts:36</a></li>
+							<li>Defined in <a href="https://github.com/nash403/fine-mq/blob/b4879ff/src/lib/types.ts#L36">lib/types.ts:36</a></li>
 						</ul>
 					</aside>
 					<div class="tsd-type-declaration">
@@ -456,14 +459,25 @@
 					</div>
 				</section>
 				<section class="tsd-panel tsd-member tsd-kind-type-alias">
-					<a name="mqdimension" class="tsd-anchor"></a>
-					<h3>Mq<wbr>Dimension</h3>
-					<div class="tsd-signature tsd-kind-icon">Mq<wbr>Dimension<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">string</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">number</span></div>
+					<a name="mqdimensionboundaries" class="tsd-anchor"></a>
+					<h3>Mq<wbr>Dimension<wbr>Boundaries</h3>
+					<div class="tsd-signature tsd-kind-icon">Mq<wbr>Dimension<wbr>Boundaries<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-symbol">{ </span>bounds<span class="tsd-signature-symbol">: </span><span class="tsd-signature-symbol">[</span><span class="tsd-signature-type">any</span><span class="tsd-signature-symbol">, </span><span class="tsd-signature-type">any</span><span class="tsd-signature-symbol">]</span><span class="tsd-signature-symbol">; </span>boundsParsed<span class="tsd-signature-symbol">: </span><span class="tsd-signature-symbol">[</span><span class="tsd-signature-type">any</span><span class="tsd-signature-symbol">, </span><span class="tsd-signature-type">any</span><span class="tsd-signature-symbol">]</span><span class="tsd-signature-symbol"> }</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/nash403/fine-mq/blob/d9259de/src/lib/helpers.ts#L13">lib/helpers.ts:13</a></li>
+							<li>Defined in <a href="https://github.com/nash403/fine-mq/blob/b4879ff/src/lib/helpers.ts#L6">lib/helpers.ts:6</a></li>
 						</ul>
 					</aside>
+					<div class="tsd-type-declaration">
+						<h4>Type declaration</h4>
+						<ul class="tsd-parameters">
+							<li class="tsd-parameter">
+								<h5>bounds<span class="tsd-signature-symbol">: </span><span class="tsd-signature-symbol">[</span><span class="tsd-signature-type">any</span><span class="tsd-signature-symbol">, </span><span class="tsd-signature-type">any</span><span class="tsd-signature-symbol">]</span></h5>
+							</li>
+							<li class="tsd-parameter">
+								<h5>bounds<wbr>Parsed<span class="tsd-signature-symbol">: </span><span class="tsd-signature-symbol">[</span><span class="tsd-signature-type">any</span><span class="tsd-signature-symbol">, </span><span class="tsd-signature-type">any</span><span class="tsd-signature-symbol">]</span></h5>
+							</li>
+						</ul>
+					</div>
 				</section>
 			</section>
 			<section class="tsd-panel-group tsd-member-group ">
@@ -478,7 +492,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/nash403/fine-mq/blob/d9259de/src/lib/fine-mq.ts#L118">lib/fine-mq.ts:118</a></li>
+									<li>Defined in <a href="https://github.com/nash403/fine-mq/blob/b4879ff/src/lib/fine-mq.ts#L118">lib/fine-mq.ts:118</a></li>
 								</ul>
 							</aside>
 							<h4 class="tsd-parameters-title">Parameters</h4>
@@ -507,7 +521,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/nash403/fine-mq/blob/d9259de/src/lib/helpers.ts#L80">lib/helpers.ts:80</a></li>
+									<li>Defined in <a href="https://github.com/nash403/fine-mq/blob/b4879ff/src/lib/helpers.ts#L108">lib/helpers.ts:108</a></li>
 								</ul>
 							</aside>
 							<h4 class="tsd-parameters-title">Parameters</h4>
@@ -530,7 +544,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/nash403/fine-mq/blob/d9259de/src/lib/fine-mq.ts#L141">lib/fine-mq.ts:141</a></li>
+									<li>Defined in <a href="https://github.com/nash403/fine-mq/blob/b4879ff/src/lib/fine-mq.ts#L141">lib/fine-mq.ts:141</a></li>
 								</ul>
 							</aside>
 							<h4 class="tsd-parameters-title">Parameters</h4>
@@ -561,7 +575,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/nash403/fine-mq/blob/d9259de/src/lib/fine-mq.ts#L30">lib/fine-mq.ts:30</a></li>
+									<li>Defined in <a href="https://github.com/nash403/fine-mq/blob/b4879ff/src/lib/fine-mq.ts#L30">lib/fine-mq.ts:30</a></li>
 								</ul>
 							</aside>
 							<h4 class="tsd-parameters-title">Parameters</h4>
@@ -590,7 +604,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/nash403/fine-mq/blob/d9259de/src/lib/helpers.ts#L33">lib/helpers.ts:33</a></li>
+									<li>Defined in <a href="https://github.com/nash403/fine-mq/blob/b4879ff/src/lib/helpers.ts#L85">lib/helpers.ts:85</a></li>
 								</ul>
 							</aside>
 							<h4 class="tsd-parameters-title">Parameters</h4>
@@ -614,16 +628,16 @@
 					</ul>
 				</section>
 				<section class="tsd-panel tsd-member tsd-kind-function">
-					<a name="extractdimensionmodifiers" class="tsd-anchor"></a>
-					<h3><span class="tsd-flag ts-flagConst">Const</span> extract<wbr>Dimension<wbr>Modifiers</h3>
+					<a name="getaliasmodifiers" class="tsd-anchor"></a>
+					<h3><span class="tsd-flag ts-flagConst">Const</span> get<wbr>Alias<wbr>Modifiers</h3>
 					<ul class="tsd-signatures tsd-kind-function">
-						<li class="tsd-signature tsd-kind-icon">extract<wbr>Dimension<wbr>Modifiers<span class="tsd-signature-symbol">(</span>alias<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span>, __namedParameters<span class="tsd-signature-symbol">: </span><span class="tsd-signature-symbol">[</span><a href="globals.html#mqdimension" class="tsd-signature-type">MqDimension</a><span class="tsd-signature-symbol">]</span>, lowerValuesForModifiers<span class="tsd-signature-symbol">: </span><span class="tsd-signature-symbol">{}</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-symbol">{}</span></li>
+						<li class="tsd-signature tsd-kind-icon">get<wbr>Alias<wbr>Modifiers<span class="tsd-signature-symbol">(</span>alias<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span>, __namedParameters<span class="tsd-signature-symbol">: </span><span class="tsd-signature-symbol">{ </span>bounds<span class="tsd-signature-symbol">: </span><span class="tsd-signature-symbol">[</span><span class="tsd-signature-type">undefined</span><span class="tsd-signature-symbol">, </span><span class="tsd-signature-type">any</span><span class="tsd-signature-symbol">]</span><span class="tsd-signature-symbol">; </span>boundsParsed<span class="tsd-signature-symbol">: </span><span class="tsd-signature-symbol">[</span><span class="tsd-signature-type">any</span><span class="tsd-signature-symbol">, </span><span class="tsd-signature-type">any</span><span class="tsd-signature-symbol">]</span><span class="tsd-signature-symbol"> }</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-symbol">{}</span></li>
 					</ul>
 					<ul class="tsd-descriptions">
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/nash403/fine-mq/blob/d9259de/src/lib/helpers.ts#L14">lib/helpers.ts:14</a></li>
+									<li>Defined in <a href="https://github.com/nash403/fine-mq/blob/b4879ff/src/lib/helpers.ts#L16">lib/helpers.ts:16</a></li>
 								</ul>
 							</aside>
 							<h4 class="tsd-parameters-title">Parameters</h4>
@@ -632,11 +646,14 @@
 									<h5>alias: <span class="tsd-signature-type">string</span></h5>
 								</li>
 								<li>
-									<h5>__namedParameters: <span class="tsd-signature-symbol">[</span><a href="globals.html#mqdimension" class="tsd-signature-type">MqDimension</a><span class="tsd-signature-symbol">]</span></h5>
-								</li>
-								<li>
-									<h5>lowerValuesForModifiers: <span class="tsd-signature-symbol">{}</span></h5>
+									<h5>__namedParameters: <span class="tsd-signature-symbol">{ </span>bounds<span class="tsd-signature-symbol">: </span><span class="tsd-signature-symbol">[</span><span class="tsd-signature-type">undefined</span><span class="tsd-signature-symbol">, </span><span class="tsd-signature-type">any</span><span class="tsd-signature-symbol">]</span><span class="tsd-signature-symbol">; </span>boundsParsed<span class="tsd-signature-symbol">: </span><span class="tsd-signature-symbol">[</span><span class="tsd-signature-type">any</span><span class="tsd-signature-symbol">, </span><span class="tsd-signature-type">any</span><span class="tsd-signature-symbol">]</span><span class="tsd-signature-symbol"> }</span></h5>
 									<ul class="tsd-parameters">
+										<li class="tsd-parameter">
+											<h5>bounds<span class="tsd-signature-symbol">: </span><span class="tsd-signature-symbol">[</span><span class="tsd-signature-type">undefined</span><span class="tsd-signature-symbol">, </span><span class="tsd-signature-type">any</span><span class="tsd-signature-symbol">]</span></h5>
+										</li>
+										<li class="tsd-parameter">
+											<h5>bounds<wbr>Parsed<span class="tsd-signature-symbol">: </span><span class="tsd-signature-symbol">[</span><span class="tsd-signature-type">any</span><span class="tsd-signature-symbol">, </span><span class="tsd-signature-type">any</span><span class="tsd-signature-symbol">]</span></h5>
+										</li>
 									</ul>
 								</li>
 							</ul>
@@ -659,7 +676,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/nash403/fine-mq/blob/d9259de/src/lib/fine-mq.ts#L20">lib/fine-mq.ts:20</a></li>
+									<li>Defined in <a href="https://github.com/nash403/fine-mq/blob/b4879ff/src/lib/fine-mq.ts#L20">lib/fine-mq.ts:20</a></li>
 								</ul>
 							</aside>
 							<h4 class="tsd-parameters-title">Parameters</h4>
@@ -676,6 +693,29 @@
 					</ul>
 				</section>
 				<section class="tsd-panel tsd-member tsd-kind-function">
+					<a name="getdimensionbounds" class="tsd-anchor"></a>
+					<h3><span class="tsd-flag ts-flagConst">Const</span> get<wbr>Dimension<wbr>Bounds</h3>
+					<ul class="tsd-signatures tsd-kind-function">
+						<li class="tsd-signature tsd-kind-icon">get<wbr>Dimension<wbr>Bounds<span class="tsd-signature-symbol">(</span>dimension<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">any</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-symbol">[</span><span class="tsd-signature-type">any</span><span class="tsd-signature-symbol">, </span><span class="tsd-signature-type">any</span><span class="tsd-signature-symbol">]</span></li>
+					</ul>
+					<ul class="tsd-descriptions">
+						<li class="tsd-description">
+							<aside class="tsd-sources">
+								<ul>
+									<li>Defined in <a href="https://github.com/nash403/fine-mq/blob/b4879ff/src/lib/helpers.ts#L41">lib/helpers.ts:41</a></li>
+								</ul>
+							</aside>
+							<h4 class="tsd-parameters-title">Parameters</h4>
+							<ul class="tsd-parameters">
+								<li>
+									<h5>dimension: <span class="tsd-signature-type">any</span></h5>
+								</li>
+							</ul>
+							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-symbol">[</span><span class="tsd-signature-type">any</span><span class="tsd-signature-symbol">, </span><span class="tsd-signature-type">any</span><span class="tsd-signature-symbol">]</span></h4>
+						</li>
+					</ul>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-function">
 					<a name="getmatchlistener" class="tsd-anchor"></a>
 					<h3><span class="tsd-flag ts-flagConst">Const</span> get<wbr>Match<wbr>Listener</h3>
 					<ul class="tsd-signatures tsd-kind-function">
@@ -685,7 +725,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/nash403/fine-mq/blob/d9259de/src/lib/fine-mq.ts#L25">lib/fine-mq.ts:25</a></li>
+									<li>Defined in <a href="https://github.com/nash403/fine-mq/blob/b4879ff/src/lib/fine-mq.ts#L25">lib/fine-mq.ts:25</a></li>
 								</ul>
 							</aside>
 							<h4 class="tsd-parameters-title">Parameters</h4>
@@ -711,7 +751,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/nash403/fine-mq/blob/d9259de/src/lib/fine-mq.ts#L17">lib/fine-mq.ts:17</a></li>
+									<li>Defined in <a href="https://github.com/nash403/fine-mq/blob/b4879ff/src/lib/fine-mq.ts#L17">lib/fine-mq.ts:17</a></li>
 								</ul>
 							</aside>
 							<h4 class="tsd-parameters-title">Parameters</h4>
@@ -728,6 +768,34 @@
 					</ul>
 				</section>
 				<section class="tsd-panel tsd-member tsd-kind-function">
+					<a name="getunshortenedmqobject" class="tsd-anchor"></a>
+					<h3><span class="tsd-flag ts-flagConst">Const</span> get<wbr>Unshortened<wbr>MqObject</h3>
+					<ul class="tsd-signatures tsd-kind-function">
+						<li class="tsd-signature tsd-kind-icon">get<wbr>Unshortened<wbr>MqObject<span class="tsd-signature-symbol">(</span>__namedParameters<span class="tsd-signature-symbol">: </span><span class="tsd-signature-symbol">{ </span>boundsParsed<span class="tsd-signature-symbol">: </span><span class="tsd-signature-symbol">[</span><span class="tsd-signature-type">any</span><span class="tsd-signature-symbol">, </span><span class="tsd-signature-type">any</span><span class="tsd-signature-symbol">]</span><span class="tsd-signature-symbol"> }</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><a href="globals.html#mediaqueryobject" class="tsd-signature-type">MediaQueryObject</a></li>
+					</ul>
+					<ul class="tsd-descriptions">
+						<li class="tsd-description">
+							<aside class="tsd-sources">
+								<ul>
+									<li>Defined in <a href="https://github.com/nash403/fine-mq/blob/b4879ff/src/lib/helpers.ts#L60">lib/helpers.ts:60</a></li>
+								</ul>
+							</aside>
+							<h4 class="tsd-parameters-title">Parameters</h4>
+							<ul class="tsd-parameters">
+								<li>
+									<h5>__namedParameters: <span class="tsd-signature-symbol">{ </span>boundsParsed<span class="tsd-signature-symbol">: </span><span class="tsd-signature-symbol">[</span><span class="tsd-signature-type">any</span><span class="tsd-signature-symbol">, </span><span class="tsd-signature-type">any</span><span class="tsd-signature-symbol">]</span><span class="tsd-signature-symbol"> }</span></h5>
+									<ul class="tsd-parameters">
+										<li class="tsd-parameter">
+											<h5>bounds<wbr>Parsed<span class="tsd-signature-symbol">: </span><span class="tsd-signature-symbol">[</span><span class="tsd-signature-type">any</span><span class="tsd-signature-symbol">, </span><span class="tsd-signature-type">any</span><span class="tsd-signature-symbol">]</span></h5>
+										</li>
+									</ul>
+								</li>
+							</ul>
+							<h4 class="tsd-returns-title">Returns <a href="globals.html#mediaqueryobject" class="tsd-signature-type">MediaQueryObject</a></h4>
+						</li>
+					</ul>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-function">
 					<a name="isdimension" class="tsd-anchor"></a>
 					<h3><span class="tsd-flag ts-flagConst">Const</span> is<wbr>Dimension</h3>
 					<ul class="tsd-signatures tsd-kind-function">
@@ -737,7 +805,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/nash403/fine-mq/blob/d9259de/src/lib/helpers.ts#L10">lib/helpers.ts:10</a></li>
+									<li>Defined in <a href="https://github.com/nash403/fine-mq/blob/b4879ff/src/lib/helpers.ts#L13">lib/helpers.ts:13</a></li>
 								</ul>
 							</aside>
 							<h4 class="tsd-parameters-title">Parameters</h4>
@@ -760,7 +828,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/nash403/fine-mq/blob/d9259de/src/lib/helpers.ts#L7">lib/helpers.ts:7</a></li>
+									<li>Defined in <a href="https://github.com/nash403/fine-mq/blob/b4879ff/src/lib/helpers.ts#L10">lib/helpers.ts:10</a></li>
 								</ul>
 							</aside>
 							<h4 class="tsd-parameters-title">Parameters</h4>
@@ -783,7 +851,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/nash403/fine-mq/blob/d9259de/src/lib/helpers.ts#L91">lib/helpers.ts:91</a></li>
+									<li>Defined in <a href="https://github.com/nash403/fine-mq/blob/b4879ff/src/lib/helpers.ts#L119">lib/helpers.ts:119</a></li>
 								</ul>
 							</aside>
 							<h4 class="tsd-parameters-title">Parameters</h4>
@@ -806,7 +874,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/nash403/fine-mq/blob/d9259de/src/lib/fine-mq.ts#L93">lib/fine-mq.ts:93</a></li>
+									<li>Defined in <a href="https://github.com/nash403/fine-mq/blob/b4879ff/src/lib/fine-mq.ts#L93">lib/fine-mq.ts:93</a></li>
 								</ul>
 							</aside>
 							<h4 class="tsd-parameters-title">Parameters</h4>
@@ -835,7 +903,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/nash403/fine-mq/blob/d9259de/src/lib/fine-mq.ts#L84">lib/fine-mq.ts:84</a></li>
+									<li>Defined in <a href="https://github.com/nash403/fine-mq/blob/b4879ff/src/lib/fine-mq.ts#L84">lib/fine-mq.ts:84</a></li>
 								</ul>
 							</aside>
 							<h4 class="tsd-parameters-title">Parameters</h4>
@@ -855,16 +923,16 @@
 					</ul>
 				</section>
 				<section class="tsd-panel tsd-member tsd-kind-function">
-					<a name="parseunitvalue" class="tsd-anchor"></a>
-					<h3><span class="tsd-flag ts-flagConst">Const</span> parse<wbr>Unit<wbr>Value</h3>
+					<a name="parsetopxorkeepvalue" class="tsd-anchor"></a>
+					<h3><span class="tsd-flag ts-flagConst">Const</span> parse<wbr>ToPx<wbr>OrKeep<wbr>Value</h3>
 					<ul class="tsd-signatures tsd-kind-function">
-						<li class="tsd-signature tsd-kind-icon">parse<wbr>Unit<wbr>Value<span class="tsd-signature-symbol">(</span>v<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">any</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">any</span></li>
+						<li class="tsd-signature tsd-kind-icon">parse<wbr>ToPx<wbr>OrKeep<wbr>Value<span class="tsd-signature-symbol">(</span>v<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">any</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">any</span></li>
 					</ul>
 					<ul class="tsd-descriptions">
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/nash403/fine-mq/blob/d9259de/src/lib/helpers.ts#L5">lib/helpers.ts:5</a></li>
+									<li>Defined in <a href="https://github.com/nash403/fine-mq/blob/b4879ff/src/lib/helpers.ts#L8">lib/helpers.ts:8</a></li>
 								</ul>
 							</aside>
 							<h4 class="tsd-parameters-title">Parameters</h4>
@@ -887,7 +955,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/nash403/fine-mq/blob/d9259de/src/lib/fine-mq.ts#L132">lib/fine-mq.ts:132</a></li>
+									<li>Defined in <a href="https://github.com/nash403/fine-mq/blob/b4879ff/src/lib/fine-mq.ts#L132">lib/fine-mq.ts:132</a></li>
 								</ul>
 							</aside>
 							<h4 class="tsd-parameters-title">Parameters</h4>
@@ -913,7 +981,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/nash403/fine-mq/blob/d9259de/src/lib/fine-mq.ts#L75">lib/fine-mq.ts:75</a></li>
+									<li>Defined in <a href="https://github.com/nash403/fine-mq/blob/b4879ff/src/lib/fine-mq.ts#L75">lib/fine-mq.ts:75</a></li>
 								</ul>
 							</aside>
 							<h4 class="tsd-parameters-title">Parameters</h4>
@@ -939,7 +1007,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/nash403/fine-mq/blob/d9259de/src/lib/fine-mq.ts#L28">lib/fine-mq.ts:28</a></li>
+									<li>Defined in <a href="https://github.com/nash403/fine-mq/blob/b4879ff/src/lib/fine-mq.ts#L28">lib/fine-mq.ts:28</a></li>
 								</ul>
 							</aside>
 							<h4 class="tsd-parameters-title">Parameters</h4>
@@ -955,6 +1023,37 @@
 						</li>
 					</ul>
 				</section>
+				<section class="tsd-panel tsd-member tsd-kind-function">
+					<a name="unshortenaliasmq" class="tsd-anchor"></a>
+					<h3><span class="tsd-flag ts-flagConst">Const</span> unshorten<wbr>Alias<wbr>Mq</h3>
+					<ul class="tsd-signatures tsd-kind-function">
+						<li class="tsd-signature tsd-kind-icon">unshorten<wbr>Alias<wbr>Mq<span class="tsd-signature-symbol">(</span>mqObject<span class="tsd-signature-symbol">: </span><a href="globals.html#mediaqueryobjectwithshortcuts" class="tsd-signature-type">MediaQueryObjectWithShortcuts</a><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-symbol">{ </span>boundaries<span class="tsd-signature-symbol">: </span><a href="globals.html#mqdimensionboundaries" class="tsd-signature-type">MqDimensionBoundaries</a><span class="tsd-signature-symbol">; </span>mq<span class="tsd-signature-symbol">: </span><a href="globals.html#mediaqueryobject" class="tsd-signature-type">MediaQueryObject</a><span class="tsd-signature-symbol"> }</span></li>
+					</ul>
+					<ul class="tsd-descriptions">
+						<li class="tsd-description">
+							<aside class="tsd-sources">
+								<ul>
+									<li>Defined in <a href="https://github.com/nash403/fine-mq/blob/b4879ff/src/lib/helpers.ts#L69">lib/helpers.ts:69</a></li>
+								</ul>
+							</aside>
+							<h4 class="tsd-parameters-title">Parameters</h4>
+							<ul class="tsd-parameters">
+								<li>
+									<h5>mqObject: <a href="globals.html#mediaqueryobjectwithshortcuts" class="tsd-signature-type">MediaQueryObjectWithShortcuts</a></h5>
+								</li>
+							</ul>
+							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-symbol">{ </span>boundaries<span class="tsd-signature-symbol">: </span><a href="globals.html#mqdimensionboundaries" class="tsd-signature-type">MqDimensionBoundaries</a><span class="tsd-signature-symbol">; </span>mq<span class="tsd-signature-symbol">: </span><a href="globals.html#mediaqueryobject" class="tsd-signature-type">MediaQueryObject</a><span class="tsd-signature-symbol"> }</span></h4>
+							<ul class="tsd-parameters">
+								<li class="tsd-parameter">
+									<h5>boundaries<span class="tsd-signature-symbol">: </span><a href="globals.html#mqdimensionboundaries" class="tsd-signature-type">MqDimensionBoundaries</a></h5>
+								</li>
+								<li class="tsd-parameter">
+									<h5>mq<span class="tsd-signature-symbol">: </span><a href="globals.html#mediaqueryobject" class="tsd-signature-type">MediaQueryObject</a></h5>
+								</li>
+							</ul>
+						</li>
+					</ul>
+				</section>
 			</section>
 			<section class="tsd-panel-group tsd-member-group ">
 				<h2>Object literals</h2>
@@ -964,7 +1063,7 @@
 					<div class="tsd-signature tsd-kind-icon">Fine<wbr>MqPlugin<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">object</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/nash403/fine-mq/blob/d9259de/src/lib/fine-mq.ts#L164">lib/fine-mq.ts:164</a></li>
+							<li>Defined in <a href="https://github.com/nash403/fine-mq/blob/b4879ff/src/lib/fine-mq.ts#L164">lib/fine-mq.ts:164</a></li>
 						</ul>
 					</aside>
 					<section class="tsd-panel tsd-member tsd-kind-function tsd-parent-kind-object-literal">
@@ -977,7 +1076,7 @@
 							<li class="tsd-description">
 								<aside class="tsd-sources">
 									<ul>
-										<li>Defined in <a href="https://github.com/nash403/fine-mq/blob/d9259de/src/lib/fine-mq.ts#L165">lib/fine-mq.ts:165</a></li>
+										<li>Defined in <a href="https://github.com/nash403/fine-mq/blob/b4879ff/src/lib/fine-mq.ts#L165">lib/fine-mq.ts:165</a></li>
 									</ul>
 								</aside>
 								<h4 class="tsd-parameters-title">Parameters</h4>
@@ -1048,7 +1147,7 @@
 						<a href="globals.html#mq" class="tsd-kind-icon">Mq</a>
 					</li>
 					<li class=" tsd-kind-type-alias">
-						<a href="globals.html#mqdimension" class="tsd-kind-icon">Mq<wbr>Dimension</a>
+						<a href="globals.html#mqdimensionboundaries" class="tsd-kind-icon">Mq<wbr>Dimension<wbr>Boundaries</a>
 					</li>
 					<li class=" tsd-kind-function">
 						<a href="globals.html#addalias" class="tsd-kind-icon">add<wbr>Alias</a>
@@ -1066,16 +1165,22 @@
 						<a href="globals.html#expandaliases" class="tsd-kind-icon">expand<wbr>Aliases</a>
 					</li>
 					<li class=" tsd-kind-function">
-						<a href="globals.html#extractdimensionmodifiers" class="tsd-kind-icon">extract<wbr>Dimension<wbr>Modifiers</a>
+						<a href="globals.html#getaliasmodifiers" class="tsd-kind-icon">get<wbr>Alias<wbr>Modifiers</a>
 					</li>
 					<li class=" tsd-kind-function">
 						<a href="globals.html#getaliasesformediaquery" class="tsd-kind-icon">get<wbr>Aliases<wbr>For<wbr>Media<wbr>Query</a>
+					</li>
+					<li class=" tsd-kind-function">
+						<a href="globals.html#getdimensionbounds" class="tsd-kind-icon">get<wbr>Dimension<wbr>Bounds</a>
 					</li>
 					<li class=" tsd-kind-function">
 						<a href="globals.html#getmatchlistener" class="tsd-kind-icon">get<wbr>Match<wbr>Listener</a>
 					</li>
 					<li class=" tsd-kind-function">
 						<a href="globals.html#getmediaquerystring" class="tsd-kind-icon">get<wbr>Media<wbr>Query<wbr>String</a>
+					</li>
+					<li class=" tsd-kind-function">
+						<a href="globals.html#getunshortenedmqobject" class="tsd-kind-icon">get<wbr>Unshortened<wbr>MqObject</a>
 					</li>
 					<li class=" tsd-kind-function">
 						<a href="globals.html#isdimension" class="tsd-kind-icon">is<wbr>Dimension</a>
@@ -1093,7 +1198,7 @@
 						<a href="globals.html#on" class="tsd-kind-icon">on</a>
 					</li>
 					<li class=" tsd-kind-function">
-						<a href="globals.html#parseunitvalue" class="tsd-kind-icon">parse<wbr>Unit<wbr>Value</a>
+						<a href="globals.html#parsetopxorkeepvalue" class="tsd-kind-icon">parse<wbr>ToPx<wbr>OrKeep<wbr>Value</a>
 					</li>
 					<li class=" tsd-kind-function">
 						<a href="globals.html#removealias" class="tsd-kind-icon">remove<wbr>Alias</a>
@@ -1103,6 +1208,9 @@
 					</li>
 					<li class=" tsd-kind-function">
 						<a href="globals.html#setmatchingaliases" class="tsd-kind-icon">set<wbr>Matching<wbr>Aliases</a>
+					</li>
+					<li class=" tsd-kind-function">
+						<a href="globals.html#unshortenaliasmq" class="tsd-kind-icon">unshorten<wbr>Alias<wbr>Mq</a>
 					</li>
 					<li class=" tsd-kind-object-literal">
 						<a href="globals.html#finemqplugin" class="tsd-kind-icon">Fine<wbr>MqPlugin</a>
