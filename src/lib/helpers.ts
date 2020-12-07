@@ -1,73 +1,98 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import { default as _json2mq, QueryObject } from 'json2mq'
 
 import { MediaQueryAliases, MediaQueryObject, MediaQueryObjectWithShortcuts } from './types'
 
-export const parseUnitValue = (v: any) => (Number.isFinite(+v) ? `${+v}px` : v)
+export type MqDimensionBoundaries = { bounds: [any, any], boundsParsed: [any, any] }
 
-export const isUnitValue = (v: any) =>
-  Number.isFinite(+v) || (typeof v === 'string' && (['px', 'em'].includes(v.slice(-2)) || 'rem' === v.slice(-2)))
+export const parseToPxOrKeepValue = (v: any) => (Number.isFinite(+v) ? `${+v}px` : v)
 
-export const isDimension = (v: any) =>
-  (Array.isArray(v) && v.length && v.length <= 2 && v.every((_v) => _v === Infinity || isUnitValue(_v))) || isUnitValue(v)
+export const isUnitValue = (v: any): boolean =>
+v === Infinity || Number.isFinite(+v) || (typeof v === 'string' && /\d+(px|r?em)$/.test(v))
 
-type MqDimension = string | number
-export const extractDimensionModifiers = (
+export const isDimension = (v: any): boolean =>
+  (Array.isArray(v) && v.length > 0 && (v.length <= 2 ? v.every((_v) => isUnitValue(_v)) : false)) || isUnitValue(v)
+
+export const getAliasModifiers = (
   alias: string,
-  [lower]: [MqDimension, MqDimension],
-  lowerValuesForModifiers: { [key in '+' | '!']: MqDimension }
+  {
+    bounds: [, upperBound],
+    boundsParsed: [lowerBoundParsed, upperBoundParsed]
+  }: MqDimensionBoundaries,
 ) => {
+  const aboveModifierMinValue = Number.isFinite(+(upperBound ?? Number.NaN)) ? parseToPxOrKeepValue(+(upperBound ?? Number.NaN) + 1) : upperBoundParsed
+  const isMinValuePossible = aboveModifierMinValue !== Infinity && typeof aboveModifierMinValue !== 'undefined'
   const modifiers: { [key: string]: any } = {}
-  if (lowerValuesForModifiers['+'] !== Infinity && typeof lowerValuesForModifiers['+'] !== 'undefined') {
+
+  if (isMinValuePossible) {
     modifiers[`${alias}+`] = {
-      minWidth: lowerValuesForModifiers['+'],
+      minWidth: aboveModifierMinValue,
     }
-    if (lower !== '0px' && lower !== '0em') {
+
+    const isLowerBoundMeaningful = !['0px', '0em', '0rem'].includes(lowerBoundParsed)
+    if (isLowerBoundMeaningful) {
       modifiers[`${alias}!`] = {
-        minWidth: lower,
+        minWidth: lowerBoundParsed,
       }
     }
   }
   return modifiers
 }
 
+export const getDimensionBounds = (dimension: any): [any, any]=> {
+  let lowerBound
+  let upperBound
+
+  if (Array.isArray(dimension)) {
+    if (dimension.length === 1) {
+      lowerBound = dimension[0]
+      upperBound = Infinity
+    } else if (dimension.length === 2) {
+      lowerBound = dimension[0]
+      upperBound = dimension[1]
+    }
+  } else {
+    lowerBound = '0px'
+    upperBound = dimension
+  }
+  return [lowerBound, upperBound]
+}
+
+export const getUnshortenedMqObject = ({ boundsParsed: [lowerBoundParsed, upperBoundParsed] }: Pick<MqDimensionBoundaries, 'boundsParsed'>): MediaQueryObject => {
+  const mqObject: MediaQueryObject = {}
+    if (lowerBoundParsed !== '0px') mqObject.minWidth = lowerBoundParsed
+    if (upperBoundParsed !== Infinity) mqObject.maxWidth = upperBoundParsed
+    return mqObject
+}
+
+const unshortenAliasMq = (mqObject: MediaQueryObjectWithShortcuts): { boundaries: MqDimensionBoundaries, mq: MediaQueryObject } => {
+  const [lowerBound, upperBound] = getDimensionBounds(mqObject)
+  const [lowerBoundParsed, upperBoundParsed] = [parseToPxOrKeepValue(lowerBound), parseToPxOrKeepValue(upperBound)]
+  const bounds: MqDimensionBoundaries = {
+    bounds: [lowerBound, upperBound],
+    boundsParsed: [lowerBoundParsed, upperBoundParsed]
+  }
+
+    return {
+      boundaries: bounds,
+      mq: getUnshortenedMqObject(bounds),
+    }
+}
+
 export const expandAliases = (aliases: { [key: string]: MediaQueryObjectWithShortcuts }): { [key: string]: MediaQueryObject } => {
   const aliasesWithModifiers: { [key: string]: MediaQueryObject } = {}
+
   for (const [alias, mqObject] of Object.entries(aliases)) {
     const isDim = isDimension(mqObject)
+
     if (isDim) {
-      let lowerBound
-      let upperBound
-
-      if (Array.isArray(mqObject)) {
-        if (mqObject.length === 1) {
-          lowerBound = mqObject[0]
-          upperBound = Infinity
-        } else if (mqObject.length === 2) {
-          lowerBound = mqObject[0]
-          upperBound = mqObject[1]
-        }
-      } else {
-        lowerBound = '0px'
-        upperBound = mqObject
-      }
-
-      const [lowerBoundParsed, upperBoundParsed] = [parseUnitValue(lowerBound), parseUnitValue(upperBound)]
-
-      const lowerValuesForModifiers = {
-        '!': upperBoundParsed,
-        '+': Number.isFinite(+(upperBound ?? Number.NaN)) ? parseUnitValue(+(upperBound ?? Number.NaN) + 1) : upperBoundParsed,
-      }
-
-      const dimensionMqObject: MediaQueryObject = {}
-      if (lowerBoundParsed !== '0px') dimensionMqObject.minWidth = lowerBoundParsed
-      if (lowerValuesForModifiers['!'] !== Infinity) dimensionMqObject.maxWidth = lowerValuesForModifiers['!']
-
+      const { boundaries, mq } = unshortenAliasMq(mqObject)
       Object.assign(
         aliasesWithModifiers,
         {
-          [alias]: dimensionMqObject,
+          [alias]: mq,
         },
-        extractDimensionModifiers(alias, [lowerBoundParsed, upperBoundParsed], lowerValuesForModifiers)
+        getAliasModifiers(alias, boundaries)
       )
     } else {
       aliasesWithModifiers[alias] = mqObject as MediaQueryObject
@@ -79,7 +104,7 @@ export const expandAliases = (aliases: { [key: string]: MediaQueryObjectWithShor
 
 export const aliases2mq = (aliases: string | { [key: string]: MediaQueryObjectWithShortcuts }): MediaQueryAliases => {
   const mqAliases: MediaQueryAliases = {}
-  const aliasesExpanded = expandAliases(typeof aliases === 'string' ? { [aliases]: aliases } : aliases)
+  const aliasesExpanded = expandAliases(typeof aliases === 'string' ? { [aliases]: _json2mq(aliases as any) } : aliases)
 
   for (const [_alias, _mediaQuery] of Object.entries(aliasesExpanded)) {
     mqAliases[_alias] = _json2mq(_mediaQuery as QueryObject)

@@ -4,6 +4,7 @@
   "description": "A fine API to use media queries in JS with ease and with first-class integration with Vue.js/Nuxt.js.",
   "main": "build/main/index.js",
   "typings": "build/main/index.d.ts",
+  "types": "build/main/index.d.ts",
   "module": "build/module/index.js",
   "repository": "https://github.com/nash403/fine-mq.git",
   "author": "Honoré Nintunze <nintu.lab@gmail.com>",
@@ -45,7 +46,8 @@
     "doc:publish": "gh-pages -m \"[ci skip] Updates\" -d build/docs",
     "version": "semantic-release",
     "reset-hard": "git clean -dfx && git reset --hard && npm i",
-    "prepare-release": "run-s reset-hard doc:html version doc:publish",
+    "prerelease": "run-s reset-hard doc:html",
+    "release": "run-s version doc:publish",
     "commit": "./node_modules/cz-customizable/standalone.js",
     "clean": "rm -rf build .nyc_output"
   },
@@ -106,6 +108,9 @@
       }
     },
     "files": [
+      "./src/**/*.spec.ts",
+      "./test/**/*.spec.ts",
+      "./tests/**/*.spec.ts",
       "!build/module/**"
     ]
   },
