@@ -3,12 +3,11 @@ import test, { Macro } from 'ava'
 import { json2mq } from '../../helpers'
 
 const testMacro: Macro<[any, any]> = (t, input, expected) => {
-	t.is(json2mq(input), expected)
+  t.is(json2mq(input), expected)
 }
 
-testMacro.title = (providedTitle = '', _, expected) => `${providedTitle} ${expected}`.trim();
-
-[
+testMacro.title = (providedTitle = '', _, expected) => `${providedTitle} ${expected}`.trim()
+;[
   [600, '(max-width: 600px)'],
   ['600px', '(max-width: 600px)'],
   ['600em', '(max-width: 600em)'],
@@ -31,11 +30,12 @@ testMacro.title = (providedTitle = '', _, expected) => `${providedTitle} ${expec
   [{ minWidth: 100, maxWidth: '600em' }, '(min-width: 100px) and (max-width: 600em)'],
   [{ minWidth: 100, maxWidth: '600rem' }, '(min-width: 100px) and (max-width: 600rem)'],
 
-  [[{ handheld: false }, { minWidth: 100, maxWidth: '600rem' }, { screen: false }], 'not handheld, (min-width: 100px) and (max-width: 600rem), not screen'],
+  [
+    [{ handheld: false }, { minWidth: 100, maxWidth: '600rem' }, { screen: false }],
+    'not handheld, (min-width: 100px) and (max-width: 600rem), not screen',
+  ],
 
   ['a non dimension string', 'a non dimension string'],
-
-
 ].forEach(([input, expected]: any, index) => {
   test(`${index}. json2mq should return`, testMacro, input, expected)
-});
+})

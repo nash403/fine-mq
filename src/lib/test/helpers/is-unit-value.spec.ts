@@ -2,14 +2,12 @@ import test, { Macro } from 'ava'
 
 import { isUnitValue } from '../../helpers'
 
-
 const isUnitValueMacro: Macro<[any, boolean]> = (t, input, expected) => {
-	t.is(isUnitValue(input), expected);
+  t.is(isUnitValue(input), expected)
 }
 
-isUnitValueMacro.title = (providedTitle = '', input, expected) => `${providedTitle} ${expected} if input = ${input}`.trim();
-
-[
+isUnitValueMacro.title = (providedTitle = '', input, expected) => `${providedTitle} ${expected} if input = ${input}`.trim()
+;[
   31,
   '875',
   '354px',
@@ -22,10 +20,8 @@ isUnitValueMacro.title = (providedTitle = '', input, expected) => `${providedTit
   Infinity,
 ].forEach((input, index) => {
   test(`(case ${index}.) isUnitValue should return`, isUnitValueMacro, input, true)
-});
-
-
-[
+})
+;[
   'toto',
   Number.NaN,
   '354pxd',
@@ -40,4 +36,4 @@ isUnitValueMacro.title = (providedTitle = '', input, expected) => `${providedTit
   {},
 ].forEach((input, index) => {
   test(`(case ${index}.) isUnitValue should return`, isUnitValueMacro, input, false)
-});
+})

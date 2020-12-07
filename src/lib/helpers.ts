@@ -3,24 +3,23 @@ import { default as _json2mq, QueryObject } from 'json2mq'
 
 import { MediaQueryAliases, MediaQueryObject, MediaQueryObjectWithShortcuts } from './types'
 
-export type MqDimensionBoundaries = { bounds: [any, any], boundsParsed: [any, any] }
+export type MqDimensionBoundaries = { bounds: [any, any]; boundsParsed: [any, any] }
 
 export const parseToPxOrKeepValue = (v: any) => (Number.isFinite(+v) ? `${+v}px` : v)
 
 export const isUnitValue = (v: any): boolean =>
-v === Infinity || Number.isFinite(+v) || (typeof v === 'string' && /\d+(px|r?em)$/.test(v))
+  v === Infinity || Number.isFinite(+v) || (typeof v === 'string' && /\d+(px|r?em)$/.test(v))
 
 export const isDimension = (v: any): boolean =>
   (Array.isArray(v) && v.length > 0 && (v.length <= 2 ? v.every((_v) => isUnitValue(_v)) : false)) || isUnitValue(v)
 
 export const getAliasModifiers = (
   alias: string,
-  {
-    bounds: [, upperBound],
-    boundsParsed: [lowerBoundParsed, upperBoundParsed]
-  }: MqDimensionBoundaries,
+  { bounds: [, upperBound], boundsParsed: [lowerBoundParsed, upperBoundParsed] }: MqDimensionBoundaries
 ) => {
-  const aboveModifierMinValue = Number.isFinite(+(upperBound ?? Number.NaN)) ? parseToPxOrKeepValue(+(upperBound ?? Number.NaN) + 1) : upperBoundParsed
+  const aboveModifierMinValue = Number.isFinite(+(upperBound ?? Number.NaN))
+    ? parseToPxOrKeepValue(+(upperBound ?? Number.NaN) + 1)
+    : upperBoundParsed
   const isMinValuePossible = aboveModifierMinValue !== Infinity && typeof aboveModifierMinValue !== 'undefined'
   const modifiers: { [key: string]: any } = {}
 
@@ -39,7 +38,7 @@ export const getAliasModifiers = (
   return modifiers
 }
 
-export const getDimensionBounds = (dimension: any): [any, any]=> {
+export const getDimensionBounds = (dimension: any): [any, any] => {
   let lowerBound
   let upperBound
 
@@ -58,25 +57,29 @@ export const getDimensionBounds = (dimension: any): [any, any]=> {
   return [lowerBound, upperBound]
 }
 
-export const getUnshortenedMqObject = ({ boundsParsed: [lowerBoundParsed, upperBoundParsed] }: Pick<MqDimensionBoundaries, 'boundsParsed'>): MediaQueryObject => {
+export const getUnshortenedMqObject = ({
+  boundsParsed: [lowerBoundParsed, upperBoundParsed],
+}: Pick<MqDimensionBoundaries, 'boundsParsed'>): MediaQueryObject => {
   const mqObject: MediaQueryObject = {}
-    if (lowerBoundParsed !== '0px') mqObject.minWidth = lowerBoundParsed
-    if (upperBoundParsed !== Infinity) mqObject.maxWidth = upperBoundParsed
-    return mqObject
+  if (lowerBoundParsed !== '0px') mqObject.minWidth = lowerBoundParsed
+  if (upperBoundParsed !== Infinity) mqObject.maxWidth = upperBoundParsed
+  return mqObject
 }
 
-const unshortenAliasMq = (mqObject: MediaQueryObjectWithShortcuts): { boundaries: MqDimensionBoundaries, mq: MediaQueryObject } => {
+const unshortenAliasMq = (
+  mqObject: MediaQueryObjectWithShortcuts
+): { boundaries: MqDimensionBoundaries; mq: MediaQueryObject } => {
   const [lowerBound, upperBound] = getDimensionBounds(mqObject)
   const [lowerBoundParsed, upperBoundParsed] = [parseToPxOrKeepValue(lowerBound), parseToPxOrKeepValue(upperBound)]
   const bounds: MqDimensionBoundaries = {
     bounds: [lowerBound, upperBound],
-    boundsParsed: [lowerBoundParsed, upperBoundParsed]
+    boundsParsed: [lowerBoundParsed, upperBoundParsed],
   }
 
-    return {
-      boundaries: bounds,
-      mq: getUnshortenedMqObject(bounds),
-    }
+  return {
+    boundaries: bounds,
+    mq: getUnshortenedMqObject(bounds),
+  }
 }
 
 export const expandAliases = (aliases: { [key: string]: MediaQueryObjectWithShortcuts }): { [key: string]: MediaQueryObject } => {

@@ -3,12 +3,11 @@ import test, { Macro } from 'ava'
 import { isDimension } from '../../helpers'
 
 const isDimensionMacro: Macro<[any, boolean]> = (t, input, expected) => {
-	t.is(isDimension(input), expected);
+  t.is(isDimension(input), expected)
 }
 
-isDimensionMacro.title = (providedTitle = '', input, expected) => `${providedTitle} ${expected} if input = ${input}`.trim();
-
-[
+isDimensionMacro.title = (providedTitle = '', input, expected) => `${providedTitle} ${expected} if input = ${input}`.trim()
+;[
   [],
   31,
   '875',
@@ -33,13 +32,11 @@ isDimensionMacro.title = (providedTitle = '', input, expected) => `${providedTit
   [670, []],
 
   ['87px', Infinity],
-  [Infinity, 57]
+  [Infinity, 57],
 ].forEach((input, index) => {
   test(`(case ${index}.) isDimension should return`, isDimensionMacro, input, true)
-});
-
-
-[
+})
+;[
   'toto',
   Number.NaN,
   '354pxd',
@@ -49,4 +46,4 @@ isDimensionMacro.title = (providedTitle = '', input, expected) => `${providedTit
   [12, '978', '93em', '1700px'],
 ].forEach((input, index) => {
   test(`(case ${index}.) isDimension should return`, isDimensionMacro, input, false)
-});
+})
