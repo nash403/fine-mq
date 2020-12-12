@@ -4,7 +4,6 @@ import { aliases2mq, json2mq } from './helpers'
 import {
   FineMediaQueries,
   MatchingAliases,
-  MediaQueryAliases,
   MediaQueryMatcherHandler,
   MediaQueryMatchListener,
   MediaQueryObject,
@@ -28,17 +27,19 @@ export const getMatchListener = (mq: Mq, aliasOrMediaQuery: string): MediaQueryM
 
 export const setMatchingAliases = (mq: Mq, matchingAliases: MatchingAliases = {}) => (mq.matchingAliases = matchingAliases)
 
-export const createNewMediaQueryMatchListener = (
+export const createMediaQueryMatchListener = (
   mq: Mq,
   aliasOrMediaQuery: string,
-  callback: MediaQueryMatcherHandler
+  callback?: MediaQueryMatcherHandler,
+  forceRegistration?: boolean
 ): MediaQueryMatchListener => {
+  if (typeof callback !== 'function')
+    throw new TypeError('The callback function needs to be defined in order to create a new match listener')
+
   let mediaQuery = getMediaQueryString(mq, aliasOrMediaQuery)
   if (!mediaQuery) {
     mediaQuery = json2mq(aliasOrMediaQuery)
   }
-  if (typeof callback !== 'function')
-    throw new TypeError('The callback function needs to be defined in order to create a new match listener')
 
   const mqMatcher: MediaQueryMatchListener = {
     handlers: [],
@@ -67,6 +68,13 @@ export const createNewMediaQueryMatchListener = (
     },
   }
 
+  if (forceRegistration) {
+    if (!(aliasOrMediaQuery in mq.aliases)) {
+      mq.aliases = { ...mq.aliases, [mediaQuery]: mediaQuery }
+    }
+    mq.matchers[mediaQuery] = mqMatcher
+  }
+
   mqMatcher.handlers.push(callback)
   mqMatcher.listener.call(undefined, { matches: mqMatcher.matcher.matches, mediaQuery, alias: aliasOrMediaQuery }) // trigger listener immediately
   mqMatcher.matcher.addEventListener('change', mqMatcher.listener)
@@ -79,15 +87,6 @@ export const removeMediaQueryMatchListener = (mq: Mq, aliasOrMediaQuery: string)
   if (mqMatcher) {
     mqMatcher.matcher.removeEventListener('change', mqMatcher.listener)
     mq.matchers = otherMatchers
-  }
-}
-
-export const on = (mq: Mq, aliasOrMediaQuery: string, callback: MediaQueryMatcherHandler): void => {
-  const mediaQuery = getMediaQueryString(mq, aliasOrMediaQuery)
-  const mqMatcher = mq.matchers[mediaQuery] || createNewMediaQueryMatchListener(mq, aliasOrMediaQuery, callback)
-  mq.matchers = {
-    ...mq.matchers,
-    [mediaQuery]: mqMatcher,
   }
 }
 
@@ -116,6 +115,17 @@ export const off = (mq: Mq, aliasOrMediaQuery?: string, callback?: MediaQueryMat
   }
 }
 
+export const on = (mq: Mq, aliasOrMediaQuery: string, callback: MediaQueryMatcherHandler): (() => void) => {
+  const mediaQuery = getMediaQueryString(mq, aliasOrMediaQuery)
+  const mqMatcher = mq.matchers[mediaQuery] || createMediaQueryMatchListener(mq, aliasOrMediaQuery, callback)
+  mq.matchers = {
+    ...mq.matchers,
+    [mediaQuery]: mqMatcher,
+  }
+
+  return () => off(mq, aliasOrMediaQuery, callback)
+}
+
 export const addAlias = (mq: Mq, alias: string | { [key: string]: MediaQueryObject }, mediaQuery?: MediaQueryObject): void => {
   if (typeof alias === 'string' && mediaQuery) {
     mq.aliases = {
@@ -127,10 +137,14 @@ export const addAlias = (mq: Mq, alias: string | { [key: string]: MediaQueryObje
       ...mq.aliases,
       ...aliases2mq(alias),
     }
-  }
+  } // else Trying to register alias "${alias}" with no media query associated. Nothing to do.
 }
 
 export const removeAlias = (mq: Mq, alias: string): void => {
+  if (!(alias in mq.aliases)) {
+    // Trying to unregister inexistant alias "${alias}". Nothing to do.
+    return
+  }
   const mqMatcher = getMatchListener(mq, alias)
   if (mqMatcher) off(mq, alias)
 
@@ -160,61 +174,4 @@ export const createFineMediaQueries = (
       addAlias(mq, alias, mediaQuery),
     removeAlias: (alias: string) => removeAlias(mq, alias),
   }
-}
-
-export const FineMqPlugin = {
-  install(app: any, options: { aliases?: MediaQueryAliases; defaultMatchingAliases?: MatchingAliases } = {}) {
-    let hasSetupListeners = false
-    const defaultLastActiveAlias = Object.keys(options.defaultMatchingAliases ?? {})[0]
-
-    const reactiveSource = app.observable({
-      // replace with app.reactive in the next major version to support vue3
-      matchingAliases: {},
-      lastActiveAlias: defaultLastActiveAlias,
-    })
-
-    const fineMq = createFineMediaQueries(
-      options.aliases || { sm: 680, md: [681, 1024], lg: [1025] },
-      options.defaultMatchingAliases
-    )
-
-    const onMqMatchEvent: MediaQueryMatcherHandler = ({ matches, alias, mediaQuery }) => {
-      const aliases = getAliasesForMediaQuery(fineMq.mq, mediaQuery)
-      const matchingAliases: MatchingAliases = {}
-      for (const _alias of aliases) {
-        matchingAliases[_alias] = matches
-      }
-      reactiveSource.matchingAliases = { ...reactiveSource.matchingAliases, ...matchingAliases }
-      if (matches) reactiveSource.lastActiveAlias = alias
-    }
-
-    app.mixin({
-      computed: {
-        $mq() {
-          return reactiveSource.matchingAliases
-        },
-        $mqLastActiveAlias() {
-          return reactiveSource.lastActiveAlias
-        },
-      },
-      created() {
-        if (this.$isServer) {
-          reactiveSource.matchingAliases = options.defaultMatchingAliases
-          reactiveSource.lastActiveAlias = defaultLastActiveAlias
-        }
-      },
-      mounted() {
-        if (!hasSetupListeners) {
-          Object.keys(fineMq.mq.aliases).forEach((alias) => fineMq.on(alias, onMqMatchEvent))
-          hasSetupListeners = true
-        }
-      },
-    })
-
-    // remove this in the next major version to support vue3
-    app.prototype.$fineMq = fineMq
-
-    // uncomment this in the next major version to support vue3
-    // app.config.globalProperties.$fineMq = fineMq
-  },
 }

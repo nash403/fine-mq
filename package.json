@@ -53,9 +53,9 @@
     "doc:html": "typedoc src/ --exclude **/*.spec.ts --target ES6 --mode file --out build/docs",
     "doc:json": "typedoc src/ --exclude **/*.spec.ts --target ES6 --mode file --json build/docs/typedoc.json",
     "doc:publish": "gh-pages -m \"[ci skip] Updates\" -d build/docs",
-    "version": "npx standard-version --no-verify -a",
+    "version": "npx standard-version --no-verify -a -t ''",
     "reset-hard": "git clean -dfx && git reset --hard && npm i",
-    "prepare-release": "run-s reset-hard test doc:html version doc:publish",
+    "prepare-release": "run-s reset-hard build test doc:html doc:json version doc:publish",
     "commit": "./node_modules/cz-customizable/standalone.js",
     "clean": "rm -rf build .nyc_output"
   },
@@ -71,9 +71,12 @@
     "@commitlint/cli": "^11.0.0",
     "@commitlint/config-conventional": "^11.0.0",
     "@istanbuljs/nyc-config-typescript": "^1.0.1",
+    "@types/node": "^14.14.12",
+    "@types/sinon": "^9.0.9",
     "@typescript-eslint/eslint-plugin": "^4.0.1",
     "@typescript-eslint/parser": "^4.0.1",
     "ava": "^3.12.1",
+    "browser-env": "^3.3.0",
     "codecov": "^3.5.0",
     "commitlint-config-cz": "^0.13.2",
     "cspell": "^4.1.0",
@@ -90,6 +93,7 @@
     "nyc": "^15.1.0",
     "open-cli": "^6.0.1",
     "prettier": "^2.1.1",
+    "sinon": "^9.2.2",
     "standard-version": "^9.0.0",
     "ts-node": "^9.0.0",
     "typedoc": "^0.19.2",
@@ -118,6 +122,9 @@
       "./test/**/*.spec.ts",
       "./tests/**/*.spec.ts",
       "!build/module/**"
+    ],
+    "require": [
+      "./test/_setup-browser-environment.js"
     ]
   },
   "lint-staged": {
