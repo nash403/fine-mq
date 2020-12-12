@@ -1,3 +1,25 @@
+# Changelog
+
+All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
+
+## [2.1.0](https://github.com/nash403/fine-mq/compare/2.0.2...2.1.0) (2020-12-12)
+
+
+### Features
+
+* return an unregister fn with on and allow local registration of listeners ([1ece0dc](https://github.com/nash403/fine-mq/commit/1ece0dc90cb0f1cc8bd8c108f6969234f47dd663))
+* **types:** export all types ([3037041](https://github.com/nash403/fine-mq/commit/3037041a8308042e0bf2c16f85078165791de299))
+
+
+### Docs
+
+* update readme ([b9c0522](https://github.com/nash403/fine-mq/commit/b9c052297ce7c30bb1a7c4e02d3a66f04c31e9da))
+
+
+### Others
+
+* change release flow ([e8a6c3b](https://github.com/nash403/fine-mq/commit/e8a6c3b46d6849c148376a79b799bec1516256e8))
+
 # [2.0.2](https://github.com/nash403/fine-mq/compare/2.0.1...2.0.2) (2020-12-07)
 
 # [2.0.1](https://github.com/nash403/fine-mq/compare/2.0.0...2.0.1) (2020-12-07)
