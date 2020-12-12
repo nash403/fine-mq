@@ -167,7 +167,9 @@ Register a `callback` which will be executed everytime the match state (true/fal
 ```js
 // `alias` is the given alias, mediaQuery is the actual media query matched and `matches` is a boolean indicating the match state.
 mq.on('(max-width: 400px)', ({ matches, alias, mediaQuery }) => {})
-mq.on('smartphones', ({ matches, alias, mediaQuery }) => {}, {})
+const unregister = mq.on('smartphones', ({ matches, alias, mediaQuery }) => {}, {})
+
+unregister() // this removes the handler you just added.
 ```
 
 ### mq.off(query, callback)
