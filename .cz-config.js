@@ -11,10 +11,6 @@ module.exports = {
     { value: 'fix', name: 'fix:        A bug fix' },
     { value: 'docs', name: 'docs:       Documentation only changes' },
     {
-      value: 'ui',
-      name: 'ui:         A change in what is displayed but not a change in behavior\n              (css, typo, translation, ...)',
-    },
-    {
       value: 'style',
       name:
         'style:      Changes that do not affect the meaning of the code\n              (white-space, formatting, missing semi-colons, etc)',
@@ -25,8 +21,8 @@ module.exports = {
         'refactor:   A code change that neither really fixes a bug nor adds a feature\n              (move/remove files, implementation, readability, etc)',
     },
     {
-      value: 'perf',
-      name: 'perf:       A code change that improves performance',
+      value: 'improvement',
+      name: 'improvement:       A code change that improves something',
     },
     { value: 'test', name: 'test:       Adding missing tests' },
     {
@@ -37,14 +33,7 @@ module.exports = {
     { value: 'wip', name: 'WIP:        Work in progress' },
   ],
 
-  scopes: [
-    { name: 'test' },
-    { name: 'docker' },
-    { name: 'gitlab' },
-    { name: 'build' },
-    { name: 'config' },
-    { name: 'deployment' },
-  ],
+  scopes: [{ name: 'test' }, { name: 'types' }, { name: 'lint' }, { name: 'build' }],
 
   allowTicketNumber: false,
   isTicketNumberRequired: false,

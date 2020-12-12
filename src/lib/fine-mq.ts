@@ -13,6 +13,7 @@ import {
 } from './types'
 
 export { aliases2mq, json2mq } from './helpers'
+export * from './types'
 
 export const getMediaQueryString = (mq: Mq, aliasOrMediaQuery: string): MediaQueryToMatch =>
   mq.aliases[aliasOrMediaQuery] || aliasOrMediaQuery
